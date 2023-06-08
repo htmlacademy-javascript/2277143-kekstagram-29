@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Aleksej Demianenko](https://up.htmlacademy.ru/javascript/29/user/2277143).
-* Наставник: `Неизвестно`.
+* Наставник: [Олег Цыганов](https://htmlacademy.ru/profile/id904531).
 
 ---
 
