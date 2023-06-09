@@ -1,1 +1,0 @@
-starting of JS cource
