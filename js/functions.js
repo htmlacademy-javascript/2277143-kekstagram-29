@@ -1,3 +1,5 @@
+// Функция проверки длинны строки
+
 function checkLengthString (string, numb) {
 
   if (string.length <= numb) {
@@ -6,19 +8,18 @@ function checkLengthString (string, numb) {
   return false;
 }
 
+//Фунция проверки на палидром
 
 function checkPalindrome(stringPalindrome) {
-  let newString1 = stringPalindrome.replaceAll(' ', '').toLowerCase();
+  const newString1 = stringPalindrome.replaceAll(' ', '').toLowerCase(); // убираем пробели + нижний регистр
   let newString2 = '';
-  for (let i = newString1.length - 1; i >= 0; i--) {
-    newString2 += newString1[i];
-  };
-  if(newString1 === newString2) {
+  for (let i = newString1.length - 1; i >= 0; i--) { // перебераем с конца
+    newString2 += newString1[i]; // записываем в новую переменную
+  }
+  if(newString1 === newString2) { // сравниваем и возвращаем булево значение
     return true;
   }
   return false;
-
 }
 
-console.log(checkPalindrome('Лёша на полке клопа нашёл '));
 
