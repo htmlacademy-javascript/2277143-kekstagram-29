@@ -38,6 +38,6 @@ function takeNumberFromString (string) { // Принимаем строку
   if (newNum.length < 1) { // Проверяем если длина строки меньше 1 (строка пустая)
     return NaN; // возвращаем NaN
   }
-  return Number(newNum); // возвращаем переменную ввиде числа
+  return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
 /*console.log(takeNumberFromString ('45ee,1.5 - -5'));*/
