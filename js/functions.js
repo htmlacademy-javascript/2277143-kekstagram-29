@@ -29,7 +29,7 @@ function checkPalindrome (string) {
 function takeNumberFromString (string) { // Принимаем строку
   let newNum = ''; // создаём переменную строку
   for(let i = 0; i < string.length; i++) { //перебираем строку
-    const num = parseInt(string[i]); // приводим каждый символ к числу
+    const num = parseInt(string[i], 10); // приводим каждый символ к числу
 
     if (Number.isNaN(num) === false) { // проверяем на NaN
       newNum += num; // вписываем в переменную если это число
