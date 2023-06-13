@@ -7,6 +7,8 @@ function checkLengthString (string, numLetters) {
   }
   return false;
 }
+checkLengthString('hom12.9', 7);
+
 /*console.log(checkLengthString('hom12.9', 7))*/
 
 //Фунция проверки на палидром
@@ -22,6 +24,7 @@ function checkPalindrome (string) {
   }
   return false;
 }
+checkPalindrome ('WoW');
 /*console.log(checkPalindrome ('WoW'))*/
 
 // Функция отделения числа
@@ -40,4 +43,5 @@ function takeNumber (string) { // Принимаем строку
   }
   return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
+takeNumber ('45ee,1.er5 - 0-5');
 /*console.log(takeNumber ('45ee,1.er5 - 0-5'));*/
