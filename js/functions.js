@@ -1,8 +1,8 @@
 // Функция проверки длинны строки
 
-function checkLengthString (string, num) {
+function checkLengthString (string, numLetters) {
 
-  if (string.length <= num) {
+  if (string.length <= numLetters) {
     return true;
   }
   return false;
@@ -12,12 +12,12 @@ function checkLengthString (string, num) {
 //Фунция проверки на палидром
 
 function checkPalindrome (string) {
-  const newString1 = string.replaceAll(' ', '').toLowerCase(); // убираем пробели + нижний регистр
-  let newString2 = '';
-  for (let i = newString1.length - 1; i >= 0; i--) { // перебираем с конца
-    newString2 += newString1[i]; // записываем в новую переменную
+  const oldString = string.replaceAll(' ', '').toLowerCase(); // убираем пробели + нижний регистр
+  let newString = '';
+  for (let i = oldString.length - 1; i >= 0; i--) { // перебираем с конца
+    newString += oldString[i]; // записываем в новую переменную
   }
-  if(newString1 === newString2) { // сравниваем и возвращаем булево значение
+  if(oldString === newString) { // сравниваем и возвращаем булево значение
     return true;
   }
   return false;
@@ -26,7 +26,7 @@ function checkPalindrome (string) {
 
 // Функция отделения числа
 
-function takeNumberFromString (string) { // Принимаем строку
+function takeNumber (string) { // Принимаем строку
   let newNum = ''; // создаём переменную строку
   for(let i = 0; i < string.length; i++) { //перебираем строку
     const num = parseInt(string[i], 10); // приводим каждый символ к числу
@@ -40,4 +40,4 @@ function takeNumberFromString (string) { // Принимаем строку
   }
   return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
-/*console.log(takeNumberFromString ('45ee,1.er5 - -5'));*/
+/*console.log(takeNumber ('45ee,1.er5 - 0-5'));*/
