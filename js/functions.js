@@ -7,7 +7,7 @@ function checkLengthString (string, num) {
   }
   return false;
 }
-/*console.log(checkLengthString('home12.9', 8))*/
+/*console.log(checkLengthString('hom12.9', 7))*/
 
 //Фунция проверки на палидром
 
@@ -40,4 +40,4 @@ function takeNumberFromString (string) { // Принимаем строку
   }
   return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
-/*console.log(takeNumberFromString ('45ee,1.5 - -5'));*/
+/*console.log(takeNumberFromString ('45ee,1.er5 - -5'));*/
