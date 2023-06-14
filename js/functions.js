@@ -45,3 +45,7 @@ function takeNumber (string) { // Принимаем строку
 }
 takeNumber ('45ee,1.er5 - 0-5');
 /*console.log(takeNumber ('45ee,1.er5 - 0-5'));*/
+
+
+
+// Start task4
