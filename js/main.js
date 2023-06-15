@@ -84,7 +84,7 @@ function createInfoFoto() { // Функция по созданию каточк
 
 
     for(let i = 0; i < getNumberComments; i++) {
-      const getNumberAvatar = getRandomInteger(0, 6);
+      const getNumberAvatar = getRandomInteger(0, 6); // Получаем номер аватара
       arrComments.push({
 
         id: generateIdComment(),
