@@ -76,13 +76,13 @@ const generatePhotoUrl = createNumber(); // получаем номер URL
 
 function createInfoFoto() { // Функция по созданию каточки
   const randomDescriptionIndex = getRandomInteger(0, exampleDescriptions.length - 1);
-
-
+  let getLikes = getRandomInteger(15, 200);
 
   return {
     id: generatePhotoId(),
     url: 'photos/' + generatePhotoUrl() + '.jpg',
-    description: exampleDescriptions[randomDescriptionIndex]
+    description: exampleDescriptions[randomDescriptionIndex],
+    likes: getLikes
   };
 }
 
