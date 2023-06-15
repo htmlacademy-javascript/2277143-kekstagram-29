@@ -70,21 +70,38 @@ function createNumber () { // Функция получения номера п�
     return lastGenerateId;
   };
 }
-const generatePhotoId = createNumber(); // получаем номер ID
+const generatePhotoId = createNumber(); // получаем ID фото
 const generatePhotoUrl = createNumber(); // получаем номер URL
-
+const generateIdComment = createNumber(); // получаем ID коммента
 
 function createInfoFoto() { // Функция по созданию каточки
-  const randomDescriptionIndex = getRandomInteger(0, exampleDescriptions.length - 1);
-  let getLikes = getRandomInteger(15, 200);
+  const randomDescriptionIndex = getRandomInteger(0, exampleDescriptions.length - 1); //Получаем индекс Description
+  const getLikes = getRandomInteger(15, 200); // Получаем номер лайков
+
+  function makeComments() { // Функция добавления коментариев
+    const arrComments = [];
+    const getNumberComments = getRandomInteger(0, 30);// Получаем номер коментариев
+
+
+    for(let i = 0; i < getNumberComments; i++) {
+      const getNumberAvatar = getRandomInteger(0, 6);
+      arrComments.push({
+
+        id: generateIdComment(),
+        avatar: `img/avatar-${ getNumberAvatar }.svg`});
+    }
+    return arrComments;
+  }
+
 
   return {
     id: generatePhotoId(),
-    url: 'photos/' + generatePhotoUrl() + '.jpg',
+    url: `photos/${ generatePhotoUrl() }.jpg`,
     description: exampleDescriptions[randomDescriptionIndex],
-    likes: getLikes
+    likes: getLikes,
+    comments: makeComments()
   };
 }
 
 console.log(createInfoFoto());
-console.log(Array.from({length: 5}, createInfoFoto));
+console.log(Array.from({length: 10}, createInfoFoto));
