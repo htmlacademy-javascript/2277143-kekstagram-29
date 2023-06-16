@@ -94,9 +94,9 @@ function createInfoFoto() { // Функция по созданию каточк
     for(let i = 0; i < getNumberComments; i++) {
 
       const getNumberAvatar = getRandomInteger(1, 6); // Получаем номер аватара
-      const getQuantityrMessage = getRandomInteger(1, 2); // Получаем номер коментрариев
+      const getQuantityrMessage = getRandomInteger(1, 2); // Получаем номер коментрариEB
 
-      const addCom = function () {
+      const addCom = function () { // Функция добавления коментариев
         let strokeMassege = '';
         for(let j = 0; j < getQuantityrMessage; j++) {
           const getMessage = exampleMessage[getRandomInteger(0, exampleMessage.length - 1)]; // Получаем cлучайный коментарий из массива
@@ -105,10 +105,12 @@ function createInfoFoto() { // Функция по созданию каточк
         return strokeMassege;
       };
 
+      const getName = exampleNames[getRandomInteger(0, exampleNames.length - 1)];
       arrComments.push({
         id: generateIdComment(),
         avatar: `img/avatar-${ getNumberAvatar }.svg`,
-        message: addCom()
+        message: addCom(),
+        name: getName
       });
     }
     return arrComments;
