@@ -73,4 +73,4 @@ function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
     comments: makeComments()
   };
 }
-console.log(Array.from({length: 3}, createInfoFoto));
+console.log(Array.from({length: 25}, createInfoFoto));
