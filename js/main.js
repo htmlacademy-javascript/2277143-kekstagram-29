@@ -93,14 +93,16 @@ function createInfoFoto() { // Функция по созданию каточк
 
     for(let i = 0; i < getNumberComments; i++) {
       const getNumberAvatar = getRandomInteger(1, 6); // Получаем номер аватара
-      const getQuantityrMessage = getRandomInteger(1, 2); // Получаем номер коментрариев
-      const getNumberMessage = getRandomInteger(0, exampleMessage.length - 1); // Получаем номер коментария из массива
+      let getMessage = exampleMessage[getRandomInteger(0, exampleMessage.length - 1)]; // Получаем cлучайный коментарий из массива
+      let getQuantityrMessage = getRandomInteger(1, 2); // Получаем номер коментрариев
+
+
 
 
       arrComments.push({
         id: generateIdComment(),
         avatar: `img/avatar-${ getNumberAvatar }.svg`,
-        message: ''
+        message: '',
       });
     }
     return arrComments;
