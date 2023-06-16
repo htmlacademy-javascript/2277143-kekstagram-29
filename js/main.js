@@ -5,13 +5,13 @@ const arrDescriptions = [
   'Девушка с цветами', 'Осенний лес', 'Солнечные луга', 'Парижская улица', 'Скалы у моря', 'Река в лесу', 'Природный камень'
 ];
 
-const exampleNames = [
+const arrNames = [
   'Альберто', 'Анжела', 'Антонио', 'Бруно', 'Валентина', 'Вероника', 'Даниэла', 'Джанлука', 'Джузеппе',
   'Елена', 'Леонардо', 'Лоренцо', 'Луиджи', 'Марио', 'Массимо', 'Маттео', 'Никола', 'Паоло', 'Пьетро',
   'Рикардо', 'Ромина', 'Сабрина', 'Сильвия', 'Фабио', 'Франческа'
 ];
 
-const exampleMessages = [
+const arrMessages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -19,7 +19,6 @@ const exampleMessages = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-
 
 function getRandomInteger (min, max) { // Функция Cлучайное число в диапазоне
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -30,7 +29,7 @@ function getRandomInteger (min, max) { // Функция Cлучайное чи�
 
 function getProgressNumber () { // Функция Номер по порядку
   let startNumber = 0;
-  return function () {
+  return function() {
     startNumber += 1;
     return startNumber;
   };
@@ -44,23 +43,23 @@ function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
 
   function makeComments() { // Функция добавления коментарИЕВ
     const arrComments = [];
-    const getListComments = getRandomInteger(0, 30);// Получаем номер коментариев
+    const getListComments = getRandomInteger(0, 30);// Получаем количество коментариев
 
     for(let i = 0; i < getListComments; i++) {
-      const addComment = function () { // Функция добавления коментарИЯ
-        let strokeMassege = '';
+      const addMasseges = function () { // Функция добавления Masseges
+        let strokeMasseges = '';
         for(let j = 0; j < getRandomInteger(1, 2); j++) {
-          const getMessage = exampleMessages[getRandomInteger(0, exampleMessages.length - 1)]; // Cлучайный коментарий из массива
-          strokeMassege = `${strokeMassege + getMessage } `;
+          const getMessage = arrMessages[getRandomInteger(0, arrMessages.length - 1)]; // Cлучайный коментарий из массива
+          strokeMasseges = `${strokeMasseges + getMessage } `;
         }
-        return strokeMassege.slice(0, -1);
+        return strokeMasseges.slice(0, -1);
       };
 
       arrComments.push({
         id: getIdComment(),
         avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
-        message: addComment(),
-        name: exampleNames[getRandomInteger(0, exampleNames.length - 1)]
+        message: addMasseges(),
+        name: arrNames[getRandomInteger(0, arrNames.length - 1)]
       });
     }
     return arrComments;
@@ -75,4 +74,4 @@ function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
   };
 }
 
-console.log(Array.from({length: 25}, createInfoFoto));
+console.log(Array.from({length: 3}, createInfoFoto));
