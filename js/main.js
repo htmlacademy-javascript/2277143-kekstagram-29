@@ -124,6 +124,6 @@ function createInfoFoto() { // Функция по созданию каточк
     comments: makeComments()
   };
 }
-
-console.log(createInfoFoto());
-console.log(Array.from({length: 5}, createInfoFoto));
+/*
+console.log(createInfoFoto());*/
+console.log(Array.from({length: 25}, createInfoFoto));
