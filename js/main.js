@@ -20,14 +20,14 @@ const arrMessages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-function getRandomInteger (min, max) { // Функция Cлучайное число в диапазоне
+function getRandomInteger(min, max) { // Функция Cлучайное число в диапазоне
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
 
-function getProgressNumber () { // Функция Номер по порядку
+function getProgressNumber() { // Функция Номер по порядку
   let startNumber = 0;
   return function() {
     startNumber += 1;
@@ -41,12 +41,12 @@ const getIdComment = getProgressNumber(); // ID коммента
 
 function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
 
-  function makeComments() { // Функция добавления коментарИЕВ
+  function makeComments() { // Функция добавления Сomments
     const arrComments = [];
     const getListComments = getRandomInteger(0, 30);// Получаем количество коментариев
 
     for(let i = 0; i < getListComments; i++) {
-      const addMasseges = function () { // Функция добавления Masseges
+      const addMasseges = function() { // Функция добавления Masseges
         let strokeMasseges = '';
         for(let j = 0; j < getRandomInteger(1, 2); j++) {
           const getMessage = arrMessages[getRandomInteger(0, arrMessages.length - 1)]; // Cлучайный коментарий из массива
@@ -73,5 +73,4 @@ function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
     comments: makeComments()
   };
 }
-
 console.log(Array.from({length: 3}, createInfoFoto));
