@@ -55,12 +55,12 @@ const exampleNames = [
 ];
 
 const exampleMessage = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  '11111',
+  '2222222',
+  '333333.',
+  '444444',
+  '5555555',
+  '66666666'
 ];
 
 
@@ -93,8 +93,24 @@ function createInfoFoto() { // Функция по созданию каточк
 
     for(let i = 0; i < getNumberComments; i++) {
       const getNumberAvatar = getRandomInteger(1, 6); // Получаем номер аватара
-      let getMessage = exampleMessage[getRandomInteger(0, exampleMessage.length - 1)]; // Получаем cлучайный коментарий из массива
       let getQuantityrMessage = getRandomInteger(1, 2); // Получаем номер коментрариев
+
+
+
+      function addCom (min, max) {
+        let strokeMassege = '';
+        for(let i = 0; i < getQuantityrMessage; i++) {
+          let getMessage = exampleMessage[getRandomInteger(0, exampleMessage.length - 1)]; // Получаем cлучайный коментарий из массива
+          strokeMassege = strokeMassege + getMessage + ' '
+        }
+        return strokeMassege
+      }
+
+
+
+
+
+
 
 
 
@@ -102,7 +118,7 @@ function createInfoFoto() { // Функция по созданию каточк
       arrComments.push({
         id: generateIdComment(),
         avatar: `img/avatar-${ getNumberAvatar }.svg`,
-        message: '',
+        message: addCom(1, 2),
       });
     }
     return arrComments;
