@@ -20,14 +20,25 @@ const arrMessages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-const getRandomInteger = function(min, max) { // Функция возвращения случайного числа в диапазоне
+/**
+ *
+ * @param {number} min
+ * @param {number} max
+ * @returns случайное число в диапазоне
+ */
+const getRandomInteger = function(min, max) {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
 
-const getProgressNumber = function() { // Функция возвращения ф-ии progress числа
+/**
+ *
+ * @returns progress number
+ * @description используем замыкание
+ */
+const getProgressNumber = function() {
   let startNumber = 0;
   return function() {
     startNumber += 1;
@@ -35,7 +46,12 @@ const getProgressNumber = function() { // Функция возвращения 
   };
 };
 
-const getRandomFromArr = function(arr) { // Функция возвращения случайного элемента массива
+/**
+ *
+ * @param {Array<type>} arr
+ * @returns случайный элемент массива
+ */
+const getRandomFromArr = function(arr) {
   return arr[getRandomInteger(0, arr.length - 1)];
 };
 
@@ -43,7 +59,12 @@ const getIdPhoto = getProgressNumber(); // Функция возвращения
 const getUrlPhoto = getProgressNumber(); // Функция возвращения случайного N URL
 const getIdComment = getProgressNumber(); // Функция возвращения случайного ID коммента
 
-const getMesseges = function() { // Функция возвращает строку комментария
+/**
+ *
+ * @returns строку комментария
+ * @description создаём из 1 или 2 случайных фраз из массива
+ */
+const getMesseges = function() {
   let strokeMesseges = '';
   const countMessages = getRandomInteger(1, 2);
   for(let j = 0; j < countMessages; j++) {
@@ -52,7 +73,11 @@ const getMesseges = function() { // Функция возвращает стро
   return strokeMesseges.slice(0, -1);
 };
 
-const getArrOfComents = function() { // Функция возвращает массив комментариев
+/**
+ *
+ * @returns массив комментариев
+ */
+const getArrOfComents = function() {
   const arrComments = [];
   const getListComments = getRandomInteger(0, 30);
 
@@ -67,7 +92,11 @@ const getArrOfComents = function() { // Функция возвращает ма
   return arrComments;
 };
 
-const createInfoFoto = function() { // Функция создает инфо-блок для фотографии
+/**
+ *
+ * @returns инфо-блок для 1 фотографии
+ */
+const createInfoFoto = function() {
   return {
     id: getIdPhoto(),
     url: `photos/${ getUrlPhoto() }.jpg`,
@@ -76,4 +105,5 @@ const createInfoFoto = function() { // Функция создает инфо-б
     comments: getArrOfComents()
   };
 };
+
 console.log(Array.from({length: 25}, createInfoFoto));
