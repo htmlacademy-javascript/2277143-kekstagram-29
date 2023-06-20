@@ -20,57 +20,60 @@ const arrMessages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-function getRandomInteger(min, max) { // Функция Cлучайное число в диапазоне
+const getRandomInteger = function(min, max) { // Функция возвращения случайного числа в диапазоне
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-}
+};
 
-function getProgressNumber() { // Функция Номер по порядку
+const getProgressNumber = function() { // Функция возвращения ф-ии progress числа
   let startNumber = 0;
   return function() {
     startNumber += 1;
     return startNumber;
   };
-}
+};
 
-const getIdPhoto = getProgressNumber(); // ID фото
-const getUrlPhoto = getProgressNumber(); // N URL
-const getIdComment = getProgressNumber(); // ID коммента
+const getRandomFromArr = function(arr) { // Функция возвращения случайного элемента массива
+  return arr[getRandomInteger(0, arr.length - 1)];
+};
 
-function createInfoFoto() { // ФУНКЦИЯ БЛОКА ФОТОГРАФИИ
+const getIdPhoto = getProgressNumber(); // Функция возвращения случайного ID фото
+const getUrlPhoto = getProgressNumber(); // Функция возвращения случайного N URL
+const getIdComment = getProgressNumber(); // Функция возвращения случайного ID коммента
 
-  function makeComments() { // Функция добавления Сomments
-    const arrComments = [];
-    const getListComments = getRandomInteger(0, 30);// Получаем количество коментариев
-
-    for(let i = 0; i < getListComments; i++) {
-      const addMasseges = function() { // Функция добавления Masseges
-        let strokeMasseges = '';
-        for(let j = 0; j < getRandomInteger(1, 2); j++) {
-          const getMessage = arrMessages[getRandomInteger(0, arrMessages.length - 1)]; // Cлучайный коментарий из массива
-          strokeMasseges = `${strokeMasseges + getMessage } `;
-        }
-        return strokeMasseges.slice(0, -1);
-      };
-
-      arrComments.push({
-        id: getIdComment(),
-        avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
-        message: addMasseges(),
-        name: arrNames[getRandomInteger(0, arrNames.length - 1)]
-      });
-    }
-    return arrComments;
+const getMesseges = function() { // Функция возвращает строку комментария
+  let strokeMesseges = '';
+  const countMessages = getRandomInteger(1, 2);
+  for(let j = 0; j < countMessages; j++) {
+    strokeMesseges += `${getRandomFromArr(arrMessages) } `;
   }
+  return strokeMesseges.slice(0, -1);
+};
 
+const getArrOfComents = function() { // Функция возвращает массив комментариев
+  const arrComments = [];
+  const getListComments = getRandomInteger(0, 30);
+
+  for(let i = 0; i < getListComments; i++) {
+    arrComments.push({
+      id: getIdComment(),
+      avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
+      message: getMesseges(),
+      name: getRandomFromArr(arrNames)
+    });
+  }
+  return arrComments;
+};
+
+const createInfoFoto = function() { // Функция создает инфо-блок для фотографии
   return {
     id: getIdPhoto(),
     url: `photos/${ getUrlPhoto() }.jpg`,
-    description: arrDescriptions[getRandomInteger(0, arrDescriptions.length - 1)],
+    description: getRandomFromArr(arrDescriptions),
     likes: getRandomInteger(15, 200),
-    comments: makeComments()
+    comments: getArrOfComents()
   };
-}
+};
 console.log(Array.from({length: 25}, createInfoFoto));
