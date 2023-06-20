@@ -36,7 +36,7 @@ checkPalindrome ('WoW');
  * @param {string} string
  * @returns число из строки
  */
-function takeNumber (string) {
+function takeNumberFromString (string) {
   let newNum = '';
   for(let i = 0; i < string.length; i++) {
     const num = parseInt(string[i], 10); // приводим каждый символ к числу
@@ -50,4 +50,4 @@ function takeNumber (string) {
   }
   return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
-takeNumber ('45ee,1.er5 - 0-5');
+takeNumberFromString ('45ee,1.er5 - 0-5');
