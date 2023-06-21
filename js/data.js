@@ -20,7 +20,7 @@ const getUrlPhoto = getProgressNumber(); // Функция возвращени�
 
 /**
  *
- * @returns инфо-блок для 1 фотографии
+ * @returns инфо-блок для 1 фотографииq
  */
 const createInfoFoto = function() {
   return {
