@@ -1,7 +1,10 @@
-// Функция проверки длинны строки
-
+/**
+ *
+ * @param {string} string
+ * @param {number} numLetters
+ * @returns проверяет длину строки
+ */
 function checkLengthString (string, numLetters) {
-
   if (string.length <= numLetters) {
     return true;
   }
@@ -9,29 +12,33 @@ function checkLengthString (string, numLetters) {
 }
 checkLengthString('hom12.9', 7);
 
-/*console.log(checkLengthString('hom12.9', 7))*/
-
-//Фунция проверки на палидром
-
+/**
+ *
+ * @param {string} string
+ * @returns проверка строки на палидром
+ * @description убираем пробелы + нижний регистр, перебираем с конца, сравниваем
+ */
 function checkPalindrome (string) {
-  const oldString = string.replaceAll(' ', '').toLowerCase(); // убираем пробели + нижний регистр
+  const oldString = string.replaceAll(' ', '').toLowerCase();
   let newString = '';
-  for (let i = oldString.length - 1; i >= 0; i--) { // перебираем с конца
-    newString += oldString[i]; // записываем в новую переменную
+  for (let i = oldString.length - 1; i >= 0; i--) {
+    newString += oldString[i];
   }
-  if(oldString === newString) { // сравниваем и возвращаем булево значение
+  if(oldString === newString) {
     return true;
   }
   return false;
 }
 checkPalindrome ('WoW');
-/*console.log(checkPalindrome ('WoW'))*/
 
-// Функция отделения числа
-
-function takeNumber (string) { // Принимаем строку
-  let newNum = ''; // создаём переменную строку
-  for(let i = 0; i < string.length; i++) { //перебираем строку
+/**
+ *
+ * @param {string} string
+ * @returns число из строки
+ */
+function takeNumberFromString (string) {
+  let newNum = '';
+  for(let i = 0; i < string.length; i++) {
     const num = parseInt(string[i], 10); // приводим каждый символ к числу
 
     if (Number.isNaN(num) === false) { // проверяем на NaN
@@ -43,6 +50,4 @@ function takeNumber (string) { // Принимаем строку
   }
   return Number(newNum); // если строка не пустая возвращаем переменную ввиде числа
 }
-takeNumber ('45ee,1.er5 - 0-5');
-/*console.log(takeNumber ('45ee,1.er5 - 0-5'));*/
-
+takeNumberFromString ('45ee,1.er5 - 0-5');
