@@ -1,5 +1,5 @@
 import {getRandomInteger, getProgressNumber, getRandomFromArr} from './util.js';
-import {getMesseges} from './get-string-of-messages.js';
+import {getArrOfComents} from './get-arr-of-comments.js';
 
 const arrDescriptions = [
   'Утренний туман', 'Закат на пляже', 'Цветущее поле', 'Горный пейзаж', 'Прогулка в парке', 'Девушка на лужайке',
@@ -8,34 +8,8 @@ const arrDescriptions = [
   'Девушка с цветами', 'Осенний лес', 'Солнечные луга', 'Парижская улица', 'Скалы у моря', 'Река в лесу', 'Природный камень'
 ];
 
-const arrNames = [
-  'Альберто', 'Анжела', 'Антонио', 'Бруно', 'Валентина', 'Вероника', 'Даниэла', 'Джанлука', 'Джузеппе',
-  'Елена', 'Леонардо', 'Лоренцо', 'Луиджи', 'Марио', 'Массимо', 'Маттео', 'Никола', 'Паоло', 'Пьетро',
-  'Рикардо', 'Ромина', 'Сабрина', 'Сильвия', 'Фабио', 'Франческа'
-];
-
 const getIdPhoto = getProgressNumber(); // Функция возвращения случайного ID фото
 const getUrlPhoto = getProgressNumber(); // Функция возвращения случайного N URL
-const getIdComment = getProgressNumber(); // Функция возвращения случайного ID коммента
-
-/**
- *
- * @returns массив комментариев
- */
-const getArrOfComents = function() {
-  const arrComments = [];
-  const getListComments = getRandomInteger(0, 30);
-
-  for(let i = 0; i < getListComments; i++) {
-    arrComments.push({
-      id: getIdComment(),
-      avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
-      message: getMesseges(),
-      name: getRandomFromArr(arrNames)
-    });
-  }
-  return arrComments;
-};
 
 /**
  *
