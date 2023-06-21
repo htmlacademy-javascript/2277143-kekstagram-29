@@ -2,7 +2,7 @@
  *
  * @param {string} string
  * @param {number} numLetters
- * @returns проверяет длину строки
+ * @returns проверку длины строки
  */
 function checkLengthString (string, numLetters) {
   if (string.length <= numLetters) {
@@ -15,7 +15,7 @@ checkLengthString('hom12.9', 7);
 /**
  *
  * @param {string} string
- * @returns проверка строки на палидром
+ * @returns проверку строки на палидром
  * @description убираем пробелы + нижний регистр, перебираем с конца, сравниваем
  */
 function checkPalindrome (string) {
@@ -34,7 +34,7 @@ checkPalindrome ('WoW');
 /**
  *
  * @param {string} string
- * @returns число из строки
+ * @returns число из цыфр строки
  */
 function takeNumberFromString (string) {
   let newNum = '';
