@@ -9,6 +9,11 @@ const arrMessages = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
+const NumberOfMessages = {
+  min: 1,
+  max: 2
+};
+
 /**
  *
  * @returns строку комментария
@@ -16,9 +21,7 @@ const arrMessages = [
  */
 const getMesseges = function() {
   let strokeMesseges = '';
-  const minNumberMessages = 1;
-  const maxNumberMessages = 2;
-  const countMessages = getRandomInteger(minNumberMessages, maxNumberMessages);
+  const countMessages = getRandomInteger(NumberOfMessages.min, NumberOfMessages.max);
   for(let j = 0; j < countMessages; j++) {
     strokeMesseges += `${getRandomFromArr(arrMessages) } `;
   }
