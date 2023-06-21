@@ -16,11 +16,13 @@ const getUrlPhoto = getProgressNumber(); // Функция возвращени�
  * @returns инфо-блок для 1 фотографии
  */
 const createInfoFoto = function() {
+  const minNumberLikes = 15;
+  const maxNumberLikes = 200;
   return {
     id: getIdPhoto(),
     url: `photos/${ getUrlPhoto() }.jpg`,
     description: getRandomFromArr(arrDescriptions),
-    likes: getRandomInteger(15, 200),
+    likes: getRandomInteger(minNumberLikes, maxNumberLikes),
     comments: getArrOfComents()
   };
 };

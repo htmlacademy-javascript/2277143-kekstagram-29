@@ -15,12 +15,16 @@ const getIdComment = getProgressNumber(); // Функция возвращени
  */
 const getArrOfComents = function() {
   const arrComments = [];
-  const getListComments = getRandomInteger(0, 30);
+  const minNumberComments = 0;
+  const maxNumberComments = 30;
+  const getListComments = getRandomInteger(minNumberComments, maxNumberComments);
 
   for(let i = 0; i < getListComments; i++) {
+    const minNumberAvatar = 1;
+    const maxNumberAvatar = 6;
     arrComments.push({
       id: getIdComment(),
-      avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
+      avatar: `img/avatar-${ getRandomInteger(minNumberAvatar, maxNumberAvatar) }.svg`,
       message: getMesseges(),
       name: getRandomFromArr(arrNames)
     });

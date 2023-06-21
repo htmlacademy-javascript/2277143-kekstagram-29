@@ -16,7 +16,9 @@ const arrMessages = [
  */
 const getMesseges = function() {
   let strokeMesseges = '';
-  const countMessages = getRandomInteger(1, 2);
+  const minNumberMessages = 1;
+  const maxNumberMessages = 2;
+  const countMessages = getRandomInteger(minNumberMessages, maxNumberMessages);
   for(let j = 0; j < countMessages; j++) {
     strokeMesseges += `${getRandomFromArr(arrMessages) } `;
   }
