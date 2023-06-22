@@ -1,3 +1,3 @@
 import {createInfoFoto} from './data.js';
-
-console.log(Array.from({length: 25}, createInfoFoto));
+const quantityObjectsInArray = 25;
+console.log(Array.from({length: quantityObjectsInArray}, createInfoFoto));

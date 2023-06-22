@@ -11,6 +11,11 @@ const arrDescriptions = [
 const getIdPhoto = getProgressNumber(); // Функция возвращения случайного ID фото
 const getUrlPhoto = getProgressNumber(); // Функция возвращения случайного N URL
 
+const NumberOfLikes = {
+  min: 15,
+  max: 200
+};
+
 /**
  *
  * @returns инфо-блок для 1 фотографии
@@ -20,10 +25,9 @@ const createInfoFoto = function() {
     id: getIdPhoto(),
     url: `photos/${ getUrlPhoto() }.jpg`,
     description: getRandomFromArr(arrDescriptions),
-    likes: getRandomInteger(15, 200),
+    likes: getRandomInteger(NumberOfLikes.min, NumberOfLikes.max),
     comments: getArrOfComents()
   };
 };
-
 
 export {createInfoFoto};

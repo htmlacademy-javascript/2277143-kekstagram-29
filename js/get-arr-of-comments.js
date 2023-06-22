@@ -9,18 +9,28 @@ const arrNames = [
 
 const getIdComment = getProgressNumber(); // Функция возвращения случайного ID коммента
 
+const NumberOfAvatar = {
+  min: 1,
+  max: 6
+};
+
+const NumberOfComments = {
+  min: 0,
+  max: 30
+};
+
 /**
  *
  * @returns массив комментариев
  */
 const getArrOfComents = function() {
   const arrComments = [];
-  const getListComments = getRandomInteger(0, 30);
+  const getListComments = getRandomInteger(NumberOfComments.min, NumberOfComments.max);
 
   for(let i = 0; i < getListComments; i++) {
     arrComments.push({
       id: getIdComment(),
-      avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
+      avatar: `img/avatar-${ getRandomInteger(NumberOfAvatar.min, NumberOfAvatar.max) }.svg`,
       message: getMesseges(),
       name: getRandomFromArr(arrNames)
     });
