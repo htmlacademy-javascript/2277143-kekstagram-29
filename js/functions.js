@@ -53,7 +53,6 @@ function takeNumberFromString (string) {
 }
 takeNumberFromString ('45ee,1.er5 - 0-5');
 
-
 /**
  *
  * @param {string} time
