@@ -84,24 +84,3 @@ const calcOfMeet1 = function(startDay, finishDay, startMeet, timeMeet) {
   }
 };
 calcOfMeet1('08:00', '17:30', '14:00', 90);
-
-/**
- *
- * @param {string} startDay
- * @param {string} finishDay
- * @param {string} startMeet
- * @param {string} timeMeet
- * @returns булево значение если встреча пройдет в срок
- */
-const calcOfMeet2 = function(startDay, finishDay, startMeet, timeMeet) {
-  const MINUTES_PER_HOUR = 60;
-  const minutesStartDay = Number(startDay.split(':')[0]) * MINUTES_PER_HOUR + Number(startDay.split(':')[1]);
-  const minutesFinishtDay = Number(finishDay.split(':')[0]) * MINUTES_PER_HOUR + Number(finishDay.split(':')[1]);
-  const minutesStartMeet = Number(startMeet.split(':')[0]) * MINUTES_PER_HOUR + Number(startMeet.split(':')[1]);
-  if(minutesStartDay <= minutesStartMeet && minutesStartMeet + timeMeet <= minutesFinishtDay) {
-    return true;
-  } else {
-    return false;
-  }
-};
-calcOfMeet2('08:00', '17:30', '14:00', 90);
