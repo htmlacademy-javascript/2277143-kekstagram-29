@@ -84,3 +84,6 @@ const calcOfMeet1 = function(startDay, finishDay, startMeet, timeMeet) {
   }
 };
 calcOfMeet1('08:00', '17:30', '14:00', 90);
+
+
+// Function for DOM
