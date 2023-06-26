@@ -1,13 +1,25 @@
 import {createInfoFoto} from './data.js';
 
-const listPistures = document.querySelector('.pictures'); // куда вставить
+const section = document.querySelector('.pictures'); // куда вставить
 
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture'); // шаблон
+const Template = document.querySelector('#picture').content.querySelector('.picture'); // шаблон
 
-const clonePictureTemplate = pictureTemplate.cloneNode(true); // создаем клон шаблона
+const createPic = createInfoFoto();
+console.log(typeof(createInfoFoto));
+console.log(typeof(createPic));
 
-listPistures.appendChild(clonePictureTemplate); // добавляем клон шаблона
+/*
+createPic.forEach(() => {
+  const cloneTemplate = Template.cloneNode(true); // создаем клон шаблона
+  cloneTemplate.querySelector('.picture__comments').textContent = '125';
 
-console.log(listPistures);
 
 
+  section.appendChild(cloneTemplate); // добавляем клон шаблона
+});
+
+console.log(section);
+
+
+
+*/
