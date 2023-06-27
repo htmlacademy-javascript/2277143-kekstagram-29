@@ -6,6 +6,7 @@ const photoTemplate = document.querySelector('#picture').content.querySelector('
 
 const getPic = createInfoPhotos();
 
+const photoListFragmment = document.createDocumentFragment()
 
 getPic.forEach((picture) => {
   const photo = photoTemplate.cloneNode(true);
@@ -14,6 +15,9 @@ getPic.forEach((picture) => {
   img.alt = picture.description;
   photo.querySelector('.picture__likes').textContent = picture.likes;
   photo.querySelector('.picture__comments').textContent = picture.comments.length;
-  section.appendChild(photo);
+  photoListFragmment.appendChild(photo);
 });
+
+section.appendChild(photoListFragmment)
+
 console.log(section);
