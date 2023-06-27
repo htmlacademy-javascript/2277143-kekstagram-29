@@ -7,9 +7,13 @@ const photoTemplate = document.querySelector('#picture').content.querySelector('
 const getPic = createInfoPhotos();
 
 
-getPic.forEach(() => {
-const photo = photoTemplate.cloneNode(true);
-section.appendChild(photo);
-;
+getPic.forEach((picture) => {
+  const photo = photoTemplate.cloneNode(true);
+  const img = photo.querySelector('.picture__img');
+  img.src = picture.url;
+  img.alt = picture.description;
+  photo.querySelector('.picture__likes').textContent = picture.likes;
+  photo.querySelector('.picture__comments').textContent = picture.comments.length;
+  section.appendChild(photo);
 });
 console.log(section);
