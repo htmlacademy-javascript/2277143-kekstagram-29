@@ -17,5 +17,3 @@ getPictures.forEach((picture) => {
 });
 
 listPhoto.appendChild(photoListFragment);
-
-console.log(listPhoto);
