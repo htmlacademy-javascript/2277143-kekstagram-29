@@ -1,19 +1,19 @@
 import {createInfoPhotos} from './data.js';
 
-const listPhoto = document.querySelector('.pictures');
+const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const getPictures = createInfoPhotos();
+const constructPictures = createInfoPhotos();
 
-const photoListFragment = document.createDocumentFragment();
+const photosFragment = document.createDocumentFragment();
 
-getPictures.forEach((picture) => {
-  const clonePhotoTemplate = photoTemplate.cloneNode(true);
-  const imgPhoto = clonePhotoTemplate.querySelector('.picture__img');
-  imgPhoto.src = picture.url;
-  imgPhoto.alt = picture.description;
-  clonePhotoTemplate.querySelector('.picture__likes').textContent = picture.likes;
-  clonePhotoTemplate.querySelector('.picture__comments').textContent = picture.comments.length;
-  photoListFragment.appendChild(clonePhotoTemplate);
+constructPictures.forEach((picture) => {
+  const photoCloneTemplate = photoTemplate.cloneNode(true);
+  const photoImage = photoCloneTemplate.querySelector('.picture__img');
+  photoImage.src = picture.url;
+  photoImage.alt = picture.description;
+  photoCloneTemplate.querySelector('.picture__likes').textContent = picture.likes;
+  photoCloneTemplate.querySelector('.picture__comments').textContent = picture.comments.length;
+  photosFragment.appendChild(photoCloneTemplate);
 });
 
-listPhoto.appendChild(photoListFragment);
+photoContainer.appendChild(photosFragment);
