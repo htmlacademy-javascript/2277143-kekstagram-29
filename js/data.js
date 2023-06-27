@@ -20,7 +20,7 @@ const NumberOfLikes = {
  *
  * @returns инфо-блок для 1 фотографии
  */
-const createInfoFoto = function() {
+const createInfoPhoto = function() {
   return {
     id: getIdPhoto(),
     url: `photos/${ getUrlPhoto() }.jpg`,
@@ -30,4 +30,7 @@ const createInfoFoto = function() {
   };
 };
 
-export {createInfoFoto};
+const quantityObjectsInArray = 25;
+const createInfoPhotos = () => (Array.from({length: quantityObjectsInArray}, createInfoPhoto));
+
+export {createInfoPhotos};

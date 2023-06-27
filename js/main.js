@@ -1,4 +1,4 @@
 import './get-pictures.js';
-import {createInfoFoto} from './data.js';
-const quantityObjectsInArray = 25;
-(Array.from({length: quantityObjectsInArray}, createInfoFoto));
+import {createInfoPhotos} from './data.js';
+
+createInfoPhotos();

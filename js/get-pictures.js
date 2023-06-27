@@ -1,25 +1,15 @@
-import {createInfoFoto} from './data.js';
+import {createInfoPhotos} from './data.js';
 
 const section = document.querySelector('.pictures'); // куда вставить
 
-const Template = document.querySelector('#picture').content.querySelector('.picture'); // шаблон
+const photoTemplate = document.querySelector('#picture').content.querySelector('.picture'); // шаблон
 
-const createPic = createInfoFoto();
-console.log(typeof(createInfoFoto));
-console.log(typeof(createPic));
-
-/*
-createPic.forEach(() => {
-  const cloneTemplate = Template.cloneNode(true); // создаем клон шаблона
-  cloneTemplate.querySelector('.picture__comments').textContent = '125';
+const getPic = createInfoPhotos();
 
 
-
-  section.appendChild(cloneTemplate); // добавляем клон шаблона
+getPic.forEach(() => {
+const photo = photoTemplate.cloneNode(true);
+section.appendChild(photo);
+;
 });
-
 console.log(section);
-
-
-
-*/
