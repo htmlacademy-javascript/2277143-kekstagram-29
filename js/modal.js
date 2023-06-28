@@ -1,20 +1,14 @@
 import './get-pictures.js';
 
-const minPhotos = document.querySelectorAll('.picture');
-
+const minArrPhotos = document.querySelectorAll('.picture');
 const bigPhoto = document.querySelector('.big-picture');
 const closePhoto = document.querySelector('.big-picture__cancel');
 
-minPhotos.forEach((photo) => {
-  photo.addEventListener('click', () => { //открываем фото
+minArrPhotos.forEach((photo) => { //открываем фото
+  photo.addEventListener('click', () => {
     bigPhoto.classList.remove('hidden');
   });
 });
-
-/*
-minPhotos.addEventListener('click', () => { //открываем фото
-  bigPhoto.classList.remove('hidden');
-});*/
 
 closePhoto.addEventListener('click', () => { // закрываем фото
   bigPhoto.classList.add('hidden');
@@ -27,6 +21,4 @@ document.addEventListener('keydown', (evt) => { // закрываем через
   }
 });
 
-
-console.log('+++');
 
