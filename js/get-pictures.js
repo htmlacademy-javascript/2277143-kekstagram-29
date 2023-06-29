@@ -6,6 +6,9 @@ const constructPictures = createInfoPhotos();
 
 const photosFragment = document.createDocumentFragment();
 
+/**
+ * Функция клонирует шаблон, заполняет его данными и вставляет в DocumentFragment
+ */
 constructPictures.forEach((picture) => {
   const photoCloneTemplate = photoTemplate.cloneNode(true);
   const photoImage = photoCloneTemplate.querySelector('.picture__img');
