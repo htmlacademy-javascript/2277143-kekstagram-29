@@ -19,4 +19,8 @@ constructPicturesArray.forEach((picture) => {
   photosFragment.appendChild(photoCloneTemplate);
 });
 
-photoContainer.appendChild(photosFragment);
+const drawPictureList = () => {
+  photoContainer.appendChild(photosFragment);
+};
+
+export {drawPictureList};
