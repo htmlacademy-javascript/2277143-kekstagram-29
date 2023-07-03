@@ -1,3 +1,7 @@
-import {createInfoFoto} from './data.js';
-const quantityObjectsInArray = 25;
-console.log(Array.from({length: quantityObjectsInArray}, createInfoFoto));
+import {drawPictureList} from './get-pictures.js';
+import './modal.js';
+import {createInfoPhotos} from './data.js';
+
+createInfoPhotos();
+drawPictureList();
+
