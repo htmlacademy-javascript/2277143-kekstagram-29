@@ -20,5 +20,3 @@ document.addEventListener('keydown', (evt) => { // закрываем через
     bigPhoto.classList.add('hidden');
   }
 });
-
-
