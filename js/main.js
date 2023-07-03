@@ -3,3 +3,4 @@ import './modal.js';
 import {createInfoPhotos} from './data.js';
 
 createInfoPhotos();
+console.log(createInfoPhotos());
