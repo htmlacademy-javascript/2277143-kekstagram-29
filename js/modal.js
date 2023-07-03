@@ -9,7 +9,6 @@ const commentsNumberBigPhoto = document.querySelector('.comments-count');
 const descriptionBigPhoto = document.querySelector('.social__caption');
 
 
-
 minArrPhotos.forEach((photo) => { //открываем фото
   photo.addEventListener('click', () => {
     bigPhoto.classList.remove('hidden');
@@ -17,10 +16,6 @@ minArrPhotos.forEach((photo) => { //открываем фото
     likesBigPhoto.textContent = photo.querySelector('.picture__likes').textContent;
     commentsNumberBigPhoto.textContent = photo.querySelector('.picture__comments').textContent;
     descriptionBigPhoto.textContent = (photo.querySelector('.picture__img')).alt;
-
-
-
-
   });
 });
 
