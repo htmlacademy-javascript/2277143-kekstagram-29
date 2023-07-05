@@ -1,2 +1,2 @@
-import './get-pictures.js';
+import './get-pictures.js'; // возможно не нужна
 import './modal.js';
