@@ -11,18 +11,15 @@ const imgBigPhoto = bigPhoto.querySelector('.big-picture__img img');
 const commentsNumberBigPhoto = bigPhoto.querySelector('.comments-count');
 const descriptionBigPhoto = bigPhoto.querySelector('.social__caption');
 
-const pictureCommentsContainer = bigPhoto.querySelector('.social__comments');
-const bigPictureCommentsCount = bigPhoto.querySelector('.social__comment-count');
-const bigPictureCommentsLoader = bigPhoto.querySelector('.comments-loader');
-
-pictureCommentsContainer.innerHTML = '';
+const commentsContainerBigPhoto = bigPhoto.querySelector('.social__comments');
+const commentsCountBigPhoto = bigPhoto.querySelector('.social__comment-count');
+const commentsLoaderBigPhoto = bigPhoto.querySelector('.comments-loader');
 
 const closeModal = function() {
   body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
   document.removeEventListener('keydown', closeEsc);
-  pictureCommentsContainer.innerHTML = '';
 };
 
 function closeEsc(evt) {
@@ -43,7 +40,7 @@ function fillComment(photo) {
     img.src = comment.avatar;
     img.alt = comment.name;
     text.textContent = comment.message;
-    pictureCommentsContainer.appendChild(element);
+    commentsContainerBigPhoto.appendChild(element);
     element.appendChild(img);
     element.appendChild(text);
   });
@@ -51,6 +48,7 @@ function fillComment(photo) {
 
 const openModal = function(element, photo) {
   element.addEventListener('click', () => {
+    commentsContainerBigPhoto.innerHTML = '';
     body.classList.add('modal-open');
     bigPhoto.classList.remove('hidden');
     imgBigPhoto.src = photo.url;
@@ -60,17 +58,17 @@ const openModal = function(element, photo) {
     fillComment(photo);
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
-    //bigPictureCommentsCount.classList.add('hidden');
-    //bigPictureCommentsLoader.classList.add('hidden');
+    commentsCountBigPhoto.classList.add('hidden');
+    commentsLoaderBigPhoto.classList.add('hidden');
 
     const arrComments = document.querySelectorAll('.social__comment'); // массив коментов
 
-    for(let i = 0; i < arrComments.length; i++){
+   /* for(let i = 0; i < arrComments.length; i++){
       console.log(arrComments.length);
       if(i > 4) {
         arrComments[i].classList.add('hidden');
       }
-    }
+    }*/
   });
 };
 
