@@ -54,11 +54,11 @@ const openModal = function(element, photo) {
     likesBigPhoto.textContent = photo.likes;
     commentsNumberBigPhoto.textContent = photo.comments.length;
     descriptionBigPhoto.textContent = photo.description;
-    bigPictureCommentsCount.classList.add('hidden');
-    bigPictureCommentsLoader.classList.add('hidden');
     fillComment(photo);
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
+    //bigPictureCommentsCount.classList.add('hidden');
+    //bigPictureCommentsLoader.classList.add('hidden');
   });
 };
 
