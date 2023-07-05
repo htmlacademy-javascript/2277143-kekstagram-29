@@ -22,8 +22,7 @@ const closeModal = function() {
   document.removeEventListener('keydown', closeEsc);
 };
 
-const closeEsc = function(evt) {
-  evt.preventDefault();
+const closeEsc = function() {
   closeModal();
   document.removeEventListener('keydown', closeEsc);
   closePhoto.removeEventListener('click', closeModal);
