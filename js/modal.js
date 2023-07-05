@@ -1,5 +1,6 @@
 import {constructPicturesArray} from './get-pictures.js';
 
+const body = document.querySelector('body');
 const rowArray = constructPicturesArray;
 const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
 const bigPhoto = document.querySelector('.big-picture'); // modal
@@ -10,10 +11,13 @@ const imgBigPhoto = document.querySelector('.big-picture__img img');
 const commentsNumberBigPhoto = document.querySelector('.comments-count');
 const descriptionBigPhoto = document.querySelector('.social__caption');
 const pictureComments = document.querySelector('.social__comments');
+const bigPictureCommentsCount = document.querySelector('.social__comment-count');
+const bigPictureCommentsLoader = document.querySelector('.comments-loader');
 
 pictureComments.innerHTML = '';
 
 const closeModal = function() {
+  body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
   pictureComments.innerHTML = '';
@@ -43,14 +47,15 @@ function fillComment(photo) {
 
 const openModal = function(element, photo) {
   element.addEventListener('click', () => {
+    body.classList.add('modal-open');
     bigPhoto.classList.remove('hidden');
     imgBigPhoto.src = photo.url;
     likesBigPhoto.textContent = photo.likes;
     commentsNumberBigPhoto.textContent = photo.comments.length;
     descriptionBigPhoto.textContent = photo.description;
-
+    bigPictureCommentsCount.classList.add('hidden');
+    bigPictureCommentsLoader.classList.add('hidden');
     fillComment(photo);
-
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
   });
