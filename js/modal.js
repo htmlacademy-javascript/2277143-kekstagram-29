@@ -1,19 +1,19 @@
 import {constructPicturesArray} from './get-pictures.js';
 
-const body = document.querySelector('body');
 const rowArray = constructPicturesArray;
+const body = document.querySelector('body');
 const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
 const bigPhoto = document.querySelector('.big-picture'); // modal
-const closePhoto = document.querySelector('.big-picture__cancel'); // кнопка закрыть
+const closePhoto = bigPhoto.querySelector('.big-picture__cancel'); // кнопка закрыть
 
-const likesBigPhoto = document.querySelector('.likes-count');
-const imgBigPhoto = document.querySelector('.big-picture__img img');
-const commentsNumberBigPhoto = document.querySelector('.comments-count');
-const descriptionBigPhoto = document.querySelector('.social__caption');
+const likesBigPhoto = bigPhoto.querySelector('.likes-count');
+const imgBigPhoto = bigPhoto.querySelector('.big-picture__img img');
+const commentsNumberBigPhoto = bigPhoto.querySelector('.comments-count');
+const descriptionBigPhoto = bigPhoto.querySelector('.social__caption');
 
-const pictureCommentsContainer = document.querySelector('.social__comments');
-const bigPictureCommentsCount = document.querySelector('.social__comment-count');
-const bigPictureCommentsLoader = document.querySelector('.comments-loader');
+const pictureCommentsContainer = bigPhoto.querySelector('.social__comments');
+const bigPictureCommentsCount = bigPhoto.querySelector('.social__comment-count');
+const bigPictureCommentsLoader = bigPhoto.querySelector('.comments-loader');
 
 pictureCommentsContainer.innerHTML = '';
 
@@ -71,7 +71,6 @@ const openModal = function(element, photo) {
         arrComments[i].classList.add('hidden');
       }
     }
-
   });
 };
 
