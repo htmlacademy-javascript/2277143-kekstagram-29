@@ -10,17 +10,18 @@ const likesBigPhoto = document.querySelector('.likes-count');
 const imgBigPhoto = document.querySelector('.big-picture__img img');
 const commentsNumberBigPhoto = document.querySelector('.comments-count');
 const descriptionBigPhoto = document.querySelector('.social__caption');
-const pictureComments = document.querySelector('.social__comments');
+
+const pictureCommentsContainer = document.querySelector('.social__comments');
 const bigPictureCommentsCount = document.querySelector('.social__comment-count');
 const bigPictureCommentsLoader = document.querySelector('.comments-loader');
 
-pictureComments.innerHTML = '';
+pictureCommentsContainer.innerHTML = '';
 
 const closeModal = function() {
   body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
-  pictureComments.innerHTML = '';
+  pictureCommentsContainer.innerHTML = '';
 };
 
 const closeEsc = function(evt) {
@@ -39,7 +40,7 @@ function fillComment(photo) {
     img.src = comment.avatar;
     img.alt = comment.name;
     text.textContent = comment.message;
-    pictureComments.appendChild(element);
+    pictureCommentsContainer.appendChild(element);
     element.appendChild(img);
     element.appendChild(text);
   });
@@ -61,6 +62,6 @@ const openModal = function(element, photo) {
   });
 };
 
-minArrPhotos.forEach((photo, index) => { //открываем фото click
+minArrPhotos.forEach((photo, index) => {
   openModal(photo, rowArray[index]);
 });
