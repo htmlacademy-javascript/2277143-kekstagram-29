@@ -27,6 +27,7 @@ const closeModal = function() {
 const closeEsc = function(evt) {
   evt.preventDefault();
   closeModal();
+  document.removeEventListener('keydown', closeEsc);
 };
 
 function fillComment(photo) {
@@ -59,6 +60,20 @@ const openModal = function(element, photo) {
     document.addEventListener('keydown', closeEsc);
     //bigPictureCommentsCount.classList.add('hidden');
     //bigPictureCommentsLoader.classList.add('hidden');
+
+    const arrComments = document.querySelectorAll('.social__comment'); // массив коментов
+
+    for(let i = 0; i < arrComments.length; i++){
+      console.log(arrComments.length);
+      if(i > 4) {
+        arrComments[i].classList.add('hidden');
+        
+      }
+    }
+
+
+
+
   });
 };
 
