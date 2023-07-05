@@ -21,14 +21,16 @@ const closeModal = function() {
   body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
+  document.removeEventListener('keydown', closeEsc);
   pictureCommentsContainer.innerHTML = '';
 };
 
-const closeEsc = function(evt) {
+function closeEsc(evt) {
   evt.preventDefault();
   closeModal();
   document.removeEventListener('keydown', closeEsc);
-};
+  closePhoto.removeEventListener('click', closeModal);
+}
 
 function fillComment(photo) {
   photo.comments.forEach((comment) => {
@@ -67,12 +69,8 @@ const openModal = function(element, photo) {
       console.log(arrComments.length);
       if(i > 4) {
         arrComments[i].classList.add('hidden');
-        
       }
     }
-
-
-
 
   });
 };
