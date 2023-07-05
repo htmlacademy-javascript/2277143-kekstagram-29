@@ -29,8 +29,8 @@ const closeEsc = function(evt) {
   closePhoto.removeEventListener('click', closeModal);
 };
 
-const fillComment = function(photo) {
-  photo.comments.forEach((comment) => {
+const fillComment = function({comments}) {
+  comments.forEach((comment) => {
     const element = document.createElement('li');
     const img = document.createElement('img');
     const text = document.createElement('p');
@@ -40,9 +40,9 @@ const fillComment = function(photo) {
     img.src = comment.avatar;
     img.alt = comment.name;
     text.textContent = comment.message;
-    commentsContainerBigPhoto.appendChild(element);
-    element.appendChild(img);
-    element.appendChild(text);
+    element.append(img);
+    element.append(text);
+    commentsContainerBigPhoto.append(element);
   });
 };
 
