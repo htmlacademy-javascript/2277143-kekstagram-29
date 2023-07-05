@@ -1,5 +1,6 @@
-import './get-pictures.js';
+import {constructPicturesArray} from './get-pictures.js';
 
+const rowArray = constructPicturesArray;
 const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
 const bigPhoto = document.querySelector('.big-picture'); // modal
 const closePhoto = document.querySelector('.big-picture__cancel'); // кнопка закрыть
@@ -11,46 +12,29 @@ const descriptionBigPhoto = document.querySelector('.social__caption');
 
 const pictureComments = document.querySelector('.social__comments');
 
-minArrPhotos.forEach((photo) => { //открываем фото click
-  photo.addEventListener('click', () => {
-    bigPhoto.classList.remove('hidden');
-    imgBigPhoto.src = (photo.querySelector('.picture__img')).src;
-    likesBigPhoto.textContent = photo.querySelector('.picture__likes').textContent;
-    commentsNumberBigPhoto.textContent = photo.querySelector('.picture__comments').textContent;
-    descriptionBigPhoto.textContent = (photo.querySelector('.picture__img')).alt;
-
-  });
-});
-
-closePhoto.addEventListener('click', () => { // закрываем фото click
+const closeModal = function() {
   bigPhoto.classList.add('hidden');
-});
+  closePhoto.removeEventListener('click', closeModal)
+};
 
-document.addEventListener('keydown', (evt) => { // закрываем фото esc
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    bigPhoto.classList.add('hidden');
-  }
-});
+const closeEsc = function(evt) {
+  evt.preventDefault();
+  closeModal();
+};
 
+const openModal = function(element, photo) {
+  element.addEventListener('click', () => {
+    bigPhoto.classList.remove('hidden');
+    imgBigPhoto.src = photo.url;
+    likesBigPhoto.textContent = photo.likes;
+    commentsNumberBigPhoto.textContent = photo.comments.length;
+    descriptionBigPhoto.textContent = photo.description;
+    closePhoto.addEventListener('click', closeModal);
 
-function fillComment(item) { // Скопировал у Владислава
-  item.comments.forEach((comment) => {
-    const element = document.createElement('li');
-    const img = document.createElement('img');
-    const text = document.createElement('p');
-
-    element.classList.add('social__comment');
-    img.classList.add('social__picture');
-    text.classList.add('social__text');
-
-    img.src = comment.avatar;
-    img.alt = comment.name;
-    text.textContent = comment.message;
-    pictureComments.appendChild(element);
-    element.appendChild(img);
-    element.appendChild(text);
+    document.addEventListener('keydown', closeEsc);
   });
-}
+};
 
-
+minArrPhotos.forEach((photo, index) => { //открываем фото click
+  openModal(photo, rowArray[index]);
+});
