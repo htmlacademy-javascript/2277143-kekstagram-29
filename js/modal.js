@@ -22,14 +22,14 @@ const closeModal = function() {
   document.removeEventListener('keydown', closeEsc);
 };
 
-function closeEsc(evt) {
+const closeEsc = function(evt) {
   evt.preventDefault();
   closeModal();
   document.removeEventListener('keydown', closeEsc);
   closePhoto.removeEventListener('click', closeModal);
-}
+};
 
-function fillComment(photo) {
+const fillComment = function(photo) {
   photo.comments.forEach((comment) => {
     const element = document.createElement('li');
     const img = document.createElement('img');
@@ -44,7 +44,7 @@ function fillComment(photo) {
     element.appendChild(img);
     element.appendChild(text);
   });
-}
+};
 
 const openModal = function(element, photo) {
   element.addEventListener('click', () => {
@@ -55,11 +55,11 @@ const openModal = function(element, photo) {
     likesBigPhoto.textContent = photo.likes;
     commentsNumberBigPhoto.textContent = photo.comments.length;
     descriptionBigPhoto.textContent = photo.description;
+    commentsCountBigPhoto.classList.add('hidden');
+    commentsLoaderBigPhoto.classList.add('hidden');
     fillComment(photo);
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
-    commentsCountBigPhoto.classList.add('hidden');
-    commentsLoaderBigPhoto.classList.add('hidden');
 
     const arrComments = document.querySelectorAll('.social__comment'); // массив коментов
 
@@ -75,3 +75,4 @@ const openModal = function(element, photo) {
 minArrPhotos.forEach((photo, index) => {
   openModal(photo, rowArray[index]);
 });
+
