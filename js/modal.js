@@ -22,7 +22,7 @@ const closeModal = function() {
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
   document.removeEventListener('keydown', closeEsc);
-  commentsLoaderBigPhoto.addEventListener('click', showMore);
+  commentsLoaderBigPhoto.removeEventListener('click', showMore);
   bigPhoto.removeEventListener('click', onOverlayClick);
 };
 
@@ -76,33 +76,43 @@ const openPhoto = function() {
 
 export {openPhoto};
 
-function hideShowMoreButton() {
+/**
+ * функция скрытия кнопки если не осталось коментариев
+ */
+const hideShowMoreButton = function() {
   if(commentsContainerBigPhoto.children.length === commentsShown.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   } else {
     commentsLoaderBigPhoto.classList.remove('hidden');
   }
-}
+};
 
-function hideComments() {
+/**
+ * функция скрытия коментариев после 5
+ */
+const hideComments = function() {
   for(let i = 5; i < commentsContainerBigPhoto.children.length; i++) {
     commentsContainerBigPhoto.children[i].classList.add('hidden');
   }
   commentsShown = bigPhoto.querySelectorAll('.social__comment:not(.hidden)');
   hideShowMoreButton();
-}
+};
 
-function showMore() {
+/**
+ * функция добавления ещё 5 коментариев
+ */
+const showMore = function() {
   for(let i = commentsShown.length; i < (commentsShown.length + 5) && i < commentsContainerBigPhoto.children.length; i++) {
     commentsContainerBigPhoto.children[i].classList.remove('hidden');
   }
   commentsShown = bigPhoto.querySelectorAll('.social__comment:not(.hidden)');
   commentsCountBigPhoto.textContent = `${commentsShown.length} из ${commentsContainerBigPhoto.children.length} комментариев`;
   hideShowMoreButton();
-}
+};
 
-function onOverlayClick(evt) {
+const onOverlayClick = function(evt) {
   if (!evt.target.closest('.big-picture__preview') || evt.target.closest('.big-picture__cancel')) {
     closeModal();
   }
-}
+};
+
