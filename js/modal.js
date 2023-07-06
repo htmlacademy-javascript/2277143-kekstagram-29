@@ -62,7 +62,10 @@ const openModal = function(element, photo) {
   });
 };
 
-minArrPhotos.forEach((photo, index) => {
-  openModal(photo, rowArray[index]);
-});
+const openPhoto = function() {
+  minArrPhotos.forEach((photo, index) => {
+    openModal(photo, rowArray[index]);
+  });
+};
 
+export {openPhoto};

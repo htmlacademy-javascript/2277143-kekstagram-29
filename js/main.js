@@ -1,2 +1,4 @@
-import './get-pictures.js'; // возможно не нужна
-import './modal.js';
+import './get-pictures.js'; // возможно не нужна?
+import {openPhoto} from './modal.js';
+
+openPhoto();
