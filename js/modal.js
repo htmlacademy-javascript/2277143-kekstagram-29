@@ -15,11 +15,15 @@ const commentsContainerBigPhoto = bigPhoto.querySelector('.social__comments');
 const commentsCountBigPhoto = bigPhoto.querySelector('.social__comment-count');
 const commentsLoaderBigPhoto = bigPhoto.querySelector('.comments-loader');
 
+let commentsShown = 0;
+
 const closeModal = function() {
   body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   closePhoto.removeEventListener('click', closeModal);
   document.removeEventListener('keydown', closeEsc);
+  commentsLoaderBigPhoto.addEventListener('click', showMore);
+  bigPhoto.removeEventListener('click', onOverlayClick);
 };
 
 const closeEsc = function() {
@@ -54,11 +58,13 @@ const openModal = function(element, photo) {
     likesBigPhoto.textContent = photo.likes;
     commentsNumberBigPhoto.textContent = photo.comments.length;
     descriptionBigPhoto.textContent = photo.description;
-    commentsCountBigPhoto.classList.add('hidden');
-    commentsLoaderBigPhoto.classList.add('hidden');
+    bigPhoto.addEventListener('click', onOverlayClick);
     fillComment(photo);
+    hideComments();
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
+    commentsCountBigPhoto.textContent = `${commentsShown.length} из ${commentsContainerBigPhoto.children.length} комментариев`;
+    commentsLoaderBigPhoto.addEventListener('click', showMore);
   });
 };
 
@@ -69,3 +75,34 @@ const openPhoto = function() {
 };
 
 export {openPhoto};
+
+function hideShowMoreButton() {
+  if(commentsContainerBigPhoto.children.length === commentsShown.length) {
+    commentsLoaderBigPhoto.classList.add('hidden');
+  } else {
+    commentsLoaderBigPhoto.classList.remove('hidden');
+  }
+}
+
+function hideComments() {
+  for(let i = 5; i < commentsContainerBigPhoto.children.length; i++) {
+    commentsContainerBigPhoto.children[i].classList.add('hidden');
+  }
+  commentsShown = bigPhoto.querySelectorAll('.social__comment:not(.hidden)');
+  hideShowMoreButton();
+}
+
+function showMore() {
+  for(let i = commentsShown.length; i < (commentsShown.length + 5) && i < commentsContainerBigPhoto.children.length; i++) {
+    commentsContainerBigPhoto.children[i].classList.remove('hidden');
+  }
+  commentsShown = bigPhoto.querySelectorAll('.social__comment:not(.hidden)');
+  commentsCountBigPhoto.textContent = `${commentsShown.length} из ${commentsContainerBigPhoto.children.length} комментариев`;
+  hideShowMoreButton();
+}
+
+function onOverlayClick(evt) {
+  if (!evt.target.closest('.big-picture__preview') || evt.target.closest('.big-picture__cancel')) {
+    closeModal();
+  }
+}
