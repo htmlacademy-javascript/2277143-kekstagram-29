@@ -49,33 +49,6 @@ const fillComment = function({comments}) {
   });
 };
 
-const openModal = function(element, photo) {
-  element.addEventListener('click', () => {
-    commentsContainerBigPhoto.innerHTML = '';
-    body.classList.add('modal-open');
-    bigPhoto.classList.remove('hidden');
-    imgBigPhoto.src = photo.url;
-    likesBigPhoto.textContent = photo.likes;
-    commentsNumberBigPhoto.textContent = photo.comments.length;
-    descriptionBigPhoto.textContent = photo.description;
-    bigPhoto.addEventListener('click', onOverlayClick);
-    fillComment(photo);
-    hideComments();
-    closePhoto.addEventListener('click', closeModal);
-    document.addEventListener('keydown', closeEsc);
-    commentsCountBigPhoto.textContent = `${commentsShown.length} из ${commentsContainerBigPhoto.children.length} комментариев`;
-    commentsLoaderBigPhoto.addEventListener('click', showMore);
-  });
-};
-
-const openPhoto = function() {
-  minArrPhotos.forEach((photo, index) => {
-    openModal(photo, rowArray[index]);
-  });
-};
-
-export {openPhoto};
-
 /**
  * функция скрытия кнопки если не осталось коментариев
  */
@@ -116,3 +89,29 @@ const onOverlayClick = function(evt) {
   }
 };
 
+const openModal = function(element, photo) {
+  element.addEventListener('click', () => {
+    commentsContainerBigPhoto.innerHTML = '';
+    body.classList.add('modal-open');
+    bigPhoto.classList.remove('hidden');
+    imgBigPhoto.src = photo.url;
+    likesBigPhoto.textContent = photo.likes;
+    commentsNumberBigPhoto.textContent = photo.comments.length;
+    descriptionBigPhoto.textContent = photo.description;
+    bigPhoto.addEventListener('click', onOverlayClick);
+    fillComment(photo);
+    hideComments();
+    closePhoto.addEventListener('click', closeModal);
+    document.addEventListener('keydown', closeEsc);
+    commentsCountBigPhoto.textContent = `${commentsShown.length} из ${commentsContainerBigPhoto.children.length} комментариев`;
+    commentsLoaderBigPhoto.addEventListener('click', showMore);
+  });
+};
+
+const openPhoto = function() {
+  minArrPhotos.forEach((photo, index) => {
+    openModal(photo, rowArray[index]);
+  });
+};
+
+export {openPhoto};
