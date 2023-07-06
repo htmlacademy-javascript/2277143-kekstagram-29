@@ -59,15 +59,6 @@ const openModal = function(element, photo) {
     fillComment(photo);
     closePhoto.addEventListener('click', closeModal);
     document.addEventListener('keydown', closeEsc);
-
-    const arrComments = document.querySelectorAll('.social__comment'); // массив коментов
-
-   /* for(let i = 0; i < arrComments.length; i++){
-      console.log(arrComments.length);
-      if(i > 4) {
-        arrComments[i].classList.add('hidden');
-      }
-    }*/
   });
 };
 
