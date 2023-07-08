@@ -2,7 +2,7 @@ import {createInfoPhotos} from './data.js';
 
 const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-export const constructPicturesArray = createInfoPhotos();
+const constructPicturesArray = createInfoPhotos();
 
 const photosFragment = document.createDocumentFragment();
 
@@ -20,3 +20,5 @@ constructPicturesArray.forEach((picture) => {
 });
 
 photoContainer.appendChild(photosFragment);
+
+export {constructPicturesArray};
