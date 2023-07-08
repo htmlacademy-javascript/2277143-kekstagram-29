@@ -1,7 +1,4 @@
-import {drawPictureList} from './get-pictures.js';
-import './modal.js';
-import {createInfoPhotos} from './data.js';
+import './get-pictures.js'; // возможно не нужна?
+import {openPhoto} from './modal.js';
 
-createInfoPhotos();
-drawPictureList();
-
+openPhoto();
