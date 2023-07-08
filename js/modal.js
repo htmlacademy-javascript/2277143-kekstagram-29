@@ -83,14 +83,12 @@ const showMoreComments = function() {
 };
 
 /**
-Функция отрисовки начальных комментариев. Именно тех, которые мервые пять штука отрисовываются при открытие модального окна
+Функция отрисовки начальных комментариев. Именно тех, которые первые пять штук отрисовываются при открытие модального окна
 * @param {array} comments - массив комментариев из объекта, дестроктуризация тут
 */
 function fillComments({comments}) {
   const showFirstComments = comments.slice(0, COMMENT_PER_PORTION);
-
   createPictureComments(showFirstComments);
-
   commentsCountBigPhoto.textContent = `${showFirstComments.length} из ${comments.length} комментариев`;
 
   // Если изначально у нас меньше или равно 5 комментариев, то прячем кнопку и счетчик комментариев
@@ -105,7 +103,6 @@ function fillComments({comments}) {
 * @param {string} picture - DOM элемент миниатюры, по который мы кликнули
 * @param {object} item - объект одной картинки, которую мы генирировали в data. Сюда передается именно объект той миниатюры по который мы кликнули. Передаем сюда этот объект в файле main.js
 */
-
 const openModal = function(element, photo) {
   element.addEventListener('click', () => {
     commentsContainerBigPhoto.innerHTML = '';
@@ -128,7 +125,6 @@ const openModal = function(element, photo) {
     fillComments(photo);
     document.addEventListener('keydown', onPictureEsc);
     closeButton.addEventListener('click', closeModal);
-
   });
 };
 
