@@ -135,3 +135,4 @@ const openPhoto = function() {
 };
 
 export {openPhoto};
+
