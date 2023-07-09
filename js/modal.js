@@ -26,13 +26,13 @@ const onPictureEsc = function(evt) {
 /**
 Функция закрытия большой картинки
 */
-const closeModal = function() {
+function closeModal () {
   body.classList.remove('modal-open');
   bigPhoto.classList.add('hidden');
   document.removeEventListener('keydown', onPictureEsc);
   closeButton.removeEventListener('click', closeModal);
   commentsLoaderBigPhoto.removeEventListener('click', showMoreComments);
-};
+}
 
 /**
  * Функция генерации комментариев
@@ -58,7 +58,7 @@ const createPictureComments = function(comments) {
 /**
  * функция добавления ещё 5 коментариев
  */
-const showMoreComments = function() {
+function showMoreComments () {
   // Если длинна массива с комментариями равно 0 то ни чего не делаем
   if (!commentsShowArray.length) {
     return;
@@ -80,7 +80,7 @@ const showMoreComments = function() {
   if (commentsShowArray.length <= commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
-};
+}
 
 /**
 Функция отрисовки начальных комментариев. Именно тех, которые первые пять штук отрисовываются при открытие модального окна
