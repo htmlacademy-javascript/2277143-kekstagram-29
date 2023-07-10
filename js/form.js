@@ -7,24 +7,25 @@ const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
 
 
-const onPictureEsc = function(evt) {
+const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
-    closeModal();
+    closeForm();
   }
 };
 
-function closeModal () {
+function closeForm () {
   body.classList.remove('modal-open');
   uploadOverlay.classList.add('hidden');
-  document.removeEventListener('keydown', onPictureEsc);
-  closeButton.removeEventListener('click', closeModal);
+  document.removeEventListener('keydown', onFormEsc);
+  closeButton.removeEventListener('click', closeForm);
+  uploadInput.value = '';
 }
 
 const openForm = function() {
   body.classList.add('modal-open');
   uploadOverlay.classList.remove('hidden');
-  document.addEventListener('keydown', onPictureEsc);
-  closeButton.addEventListener('click', closeModal);
+  document.addEventListener('keydown', onFormEsc);
+  closeButton.addEventListener('click', closeForm);
 };
 
 uploadInput.addEventListener('input', () => {
