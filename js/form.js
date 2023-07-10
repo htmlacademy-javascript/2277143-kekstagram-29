@@ -7,7 +7,8 @@ const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
 const textAreaDescripton = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
-const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+
 
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
@@ -35,6 +36,9 @@ const openForm = function() {
   closeButton.addEventListener('click', closeForm);
 };
 
+/**
+ * отерытие формы
+ */
 uploadInput.addEventListener('input', () => {
   openForm();
 });
@@ -44,15 +48,15 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
 });
 
+const validateHashtag = function (value) {
+
+};
+
+pristine.addValidator(uploadForm.querySelector(inputHashtag), validateHashtag);
+
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-
-  const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
-  }
+  pristine.validate();
 });
 
 
