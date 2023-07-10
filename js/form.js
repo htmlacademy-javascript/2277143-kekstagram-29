@@ -48,11 +48,21 @@ const pristine = new Pristine(uploadForm, {
   errorTextParent: 'img-upload__field-wrapper',
 });
 
-const validateHashtag = function (value) {
-
+/**
+ *
+ * @returns  Проверяем массив тегов на несовпадение и критерии
+ */
+const validateHashtag = function () { // Проверяем массив тегов на несовпадение и критерии
+  const arrHashtag = inputHashtag.value.split(' ');
+  for (let i = 0; i < arrHashtag.length; i++) {
+    if (rulesHashtag.test(arrHashtag[i]) !== true || arrHashtag.indexOf(arrHashtag[i]) !== i) {
+      return false;
+    }
+  }
+  return true;
 };
 
-pristine.addValidator(uploadForm.querySelector(inputHashtag), validateHashtag);
+pristine.addValidator(inputHashtag, validateHashtag);
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
