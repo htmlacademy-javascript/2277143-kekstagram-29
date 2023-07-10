@@ -5,20 +5,27 @@ const uploadInput = upload.querySelector('.img-upload__input');
 const uploadOverlay = upload.querySelector('.img-upload__overlay');
 const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
-
+const textAreaDescripton = uploadForm.querySelector('.text__description');
+const inputHashtag = uploadForm.querySelector('.text__hashtags');
+const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
-    closeForm();
+    evt.preventDefault();
+    if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
+      closeForm();
+    }
   }
 };
 
 function closeForm () {
+  uploadInput.value = '';
+  textAreaDescripton.value = '';
+  inputHashtag.value = '';
   body.classList.remove('modal-open');
   uploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onFormEsc);
   closeButton.removeEventListener('click', closeForm);
-  uploadInput.value = '';
 }
 
 const openForm = function() {
@@ -47,3 +54,9 @@ uploadForm.addEventListener('submit', (evt) => {
     console.log('Форма невалидна');
   }
 });
+
+
+
+
+
+// console.log(inputHashtag.value)
