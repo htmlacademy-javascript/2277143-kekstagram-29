@@ -52,7 +52,7 @@ const pristine = new Pristine(uploadForm, {
  *
  * @returns  Проверяем массив тегов на несовпадение и критерии
  */
-const validateHashtag = function () { // Проверяем массив тегов на несовпадение и критерии
+const validateHashtag = function () {
   const arrHashtag = inputHashtag.value.split(' ');
   for (let i = 0; i < arrHashtag.length; i++) {
     if (rulesHashtag.test(arrHashtag[i]) !== true || arrHashtag.indexOf(arrHashtag[i]) !== i) {
@@ -62,7 +62,10 @@ const validateHashtag = function () { // Проверяем массив тег�
   return true;
 };
 
-pristine.addValidator(inputHashtag, validateHashtag);
+pristine.addValidator(inputHashtag,
+  validateHashtag,
+  'Ошибка'
+);
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
