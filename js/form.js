@@ -8,7 +8,7 @@ const closeButton = upload.querySelector('.img-upload__cancel');
 const textAreaDescripton = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-
+const numberOfHashtag = 5;
 
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
@@ -37,25 +37,29 @@ const openForm = function() {
 };
 
 /**
- * отерытие формы
+ * открытие формы
  */
-uploadInput.addEventListener('input', () => {
-  openForm();
-});
+uploadInput.addEventListener('change', openForm);
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-});
+}, false);
 
 /**
  *
  * @returns  Проверяем массив тегов на несовпадение и критерии
  */
 const validateHashtag = function () {
-  const arrHashtag = inputHashtag.value.split(' ');
+  if(inputHashtag.value === '') {
+    return true;
+  }
+  if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
+    inputHashtag.value = inputHashtag.value.slice(0, -1);
+  }
+  const arrHashtag = inputHashtag.value.toLowerCase().split(' ');
   for (let i = 0; i < arrHashtag.length; i++) {
-    if (rulesHashtag.test(arrHashtag[i]) !== true || arrHashtag.indexOf(arrHashtag[i]) !== i) {
+    if (!rulesHashtag.test(arrHashtag[i]) || arrHashtag.indexOf(arrHashtag[i]) !== i || arrHashtag.length > numberOfHashtag) {
       return false;
     }
   }
@@ -68,12 +72,12 @@ pristine.addValidator(inputHashtag,
 );
 
 uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+
+  const isValidate = pristine.validate();
+  if(!isValidate) {
+    evt.preventDefault();
+  }
 });
-
-
-
 
 
 // console.log(inputHashtag.value)
