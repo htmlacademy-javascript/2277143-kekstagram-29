@@ -81,7 +81,7 @@ const getErrorMessages = function () {
       messageOne = 'введён невалидный хэш-тег\n';
     }
     if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
-      messageTwo = 'введены повторяющиеся хеш-теги\n';
+      messageTwo = 'хэш-теги повторяются\n';
     }
     if(arrHashtags.length > 5) {
       messageThree = 'превышено количество хэш-тегов\n';
