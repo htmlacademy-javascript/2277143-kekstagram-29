@@ -91,7 +91,6 @@ const getErrorMessages = function () {
   return errorMessage;
 };
 
-
 pristine.addValidator(inputHashtag,
   validateHashtag,
   getErrorMessages
