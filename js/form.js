@@ -48,7 +48,7 @@ const pristine = new Pristine(uploadForm, {
 
 /**
  *
- * @returns  Проверяем массив тегов на несовпадение и критерии
+ * @returns  Проверяем массив на валидацию
  */
 const validateHashtag = function () {
   if(inputHashtag.value === '') {
@@ -68,11 +68,10 @@ const validateHashtag = function () {
 
 pristine.addValidator(inputHashtag,
   validateHashtag,
-  'Ошибка'
+  'errore'
 );
 
 uploadForm.addEventListener('submit', (evt) => {
-
   const isValidate = pristine.validate();
   if(!isValidate) {
     evt.preventDefault();
