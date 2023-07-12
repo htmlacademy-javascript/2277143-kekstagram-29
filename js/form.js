@@ -76,10 +76,10 @@ const errorMessage = function () {
   let hashtagErrorMessage = '';
   for (let i = 0; i < arrHashtags.length; i++) {
     if(!rulesHashtag.test(arrHashtags[i])) {
-      errorMessageOne = 'введён невалидный хэш-тег,\n';
+      errorMessageOne = 'введён невалидный хэш-тег\n';
     }
     if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
-      errorMessageTwo = 'введены повторяющиеся хеш-теги,\n';
+      errorMessageTwo = 'введены повторяющиеся хеш-теги\n';
     }
     if(arrHashtags.length > 5) {
       errorMessageThree = 'превышено количество хэш-тегов\n';
