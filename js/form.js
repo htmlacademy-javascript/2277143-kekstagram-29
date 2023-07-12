@@ -57,42 +57,44 @@ const validateHashtag = function () {
   if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
     inputHashtag.value = inputHashtag.value.slice(0, -1);
   }
-  const arrHashtag = inputHashtag.value.toLowerCase().split(' ');
-
-  for (let i = 0; i < arrHashtag.length; i++) {
-    if (!rulesHashtag.test(arrHashtag[i]) || arrHashtag.indexOf(arrHashtag[i]) !== i || arrHashtag.length > numberOfHashtag) {
+  const hashtags = inputHashtag.value.toLowerCase().split(' ');
+  for (let i = 0; i < hashtags.length; i++) {
+    if (!rulesHashtag.test(hashtags[i]) || hashtags.indexOf(hashtags[i]) !== i || hashtags.length > numberOfHashtag) {
       return false;
     }
   }
   return true;
 };
 
-const errorMessage = function () {
+/**
+ * Функция строки ошибки
+ */
+const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
-  let errorMessageOne = '';
-  let errorMessageTwo = '';
-  let errorMessageThree = '';
-  let hashtagErrorMessage = '';
+  let messageOne = '';
+  let messageTwo = '';
+  let messageThree = '';
+  let errorMessage = '';
   for (let i = 0; i < arrHashtags.length; i++) {
     if(!rulesHashtag.test(arrHashtags[i])) {
-      errorMessageOne = 'введён невалидный хэш-тег\n';
+      messageOne = 'введён невалидный хэш-тег\n';
     }
     if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
-      errorMessageTwo = 'введены повторяющиеся хеш-теги\n';
+      messageTwo = 'введены повторяющиеся хеш-теги\n';
     }
     if(arrHashtags.length > 5) {
-      errorMessageThree = 'превышено количество хэш-тегов\n';
+      messageThree = 'превышено количество хэш-тегов\n';
     }
-    hashtagErrorMessage = errorMessageOne + errorMessageTwo + errorMessageThree;
+    errorMessage = messageOne + messageTwo + messageThree;
   }
-  return hashtagErrorMessage;
+  return errorMessage;
 };
 
 
 pristine.addValidator(inputHashtag,
   validateHashtag,
-  errorMessage
+  getErrorMessages
 );
 
 uploadForm.addEventListener('submit', (evt) => {
