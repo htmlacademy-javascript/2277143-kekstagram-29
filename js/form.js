@@ -58,6 +58,7 @@ const validateHashtag = function () {
     inputHashtag.value = inputHashtag.value.slice(0, -1);
   }
   const arrHashtag = inputHashtag.value.toLowerCase().split(' ');
+
   for (let i = 0; i < arrHashtag.length; i++) {
     if (!rulesHashtag.test(arrHashtag[i]) || arrHashtag.indexOf(arrHashtag[i]) !== i || arrHashtag.length > numberOfHashtag) {
       return false;
@@ -66,9 +67,32 @@ const validateHashtag = function () {
   return true;
 };
 
+const errorMessage = function () {
+  const hashtagLowerCase = inputHashtag.value.toLowerCase();
+  const arrHashtags = hashtagLowerCase.split(' ');
+  let errorMessageOne = '';
+  let errorMessageTwo = '';
+  let errorMessageThree = '';
+  let hashtagErrorMessage = '';
+  for (let i = 0; i < arrHashtags.length; i++) {
+    if(!rulesHashtag.test(arrHashtags[i])) {
+      errorMessageOne = 'введён невалидный хэш-тег';
+    }
+    if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
+      errorMessageTwo = 'введены повторяющиеся хеш-теги';
+    }
+    if(arrHashtags.length > 5) {
+      errorMessageThree = 'превышено количество хэш-тегов';
+    }
+    hashtagErrorMessage = errorMessageOne + errorMessageTwo + errorMessageThree;
+  }
+  return hashtagErrorMessage;
+};
+
+
 pristine.addValidator(inputHashtag,
   validateHashtag,
-  'errore'
+  errorMessage
 );
 
 uploadForm.addEventListener('submit', (evt) => {
