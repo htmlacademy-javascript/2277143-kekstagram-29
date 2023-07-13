@@ -18,6 +18,7 @@ const onFormEsc = function(evt) {
     if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
       closeForm();
     }
+    uploadForm.reset();
   }
 };
 
@@ -116,5 +117,3 @@ uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
   }
 });
-
-// console.log(inputHashtag.value)
