@@ -1,3 +1,5 @@
+import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
+import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
 
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
@@ -16,6 +18,7 @@ const onFormEsc = function(evt) {
     if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
       closeForm();
     }
+    uploadForm.reset();
   }
 };
 
@@ -27,6 +30,11 @@ function closeForm () {
   uploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onFormEsc);
   closeButton.removeEventListener('click', closeForm);
+  resetScale();
+  smallerButton.removeEventListener('click', onSmallerButtonClick);
+  biggerButton.removeEventListener('click', onBiggerButtonClick);
+  resetEffects();
+  effectsContainer.removeEventListener('change', changeFilters);
 }
 
 const openForm = function() {
@@ -34,12 +42,19 @@ const openForm = function() {
   uploadOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onFormEsc);
   closeButton.addEventListener('click', closeForm);
+  smallerButton.addEventListener('click', onSmallerButtonClick);
+  biggerButton.addEventListener('click', onBiggerButtonClick);
+  effectsContainer.addEventListener('change', changeFilters);
 };
 
 /**
  * открытие формы
  */
-uploadInput.addEventListener('change', openForm);
+const onUploadFoto = function() {
+  uploadInput.addEventListener('change', openForm);
+};
+
+export {onUploadFoto};
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -48,7 +63,7 @@ const pristine = new Pristine(uploadForm, {
 
 /**
  *
- * @returns  Проверяем массив на валидацию
+ * @returns boolean, Проверяем массив на валидацию
  */
 const validateHashtag = function () {
   if(inputHashtag.value === '') {
@@ -102,6 +117,3 @@ uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
   }
 });
-
-
-// console.log(inputHashtag.value)
