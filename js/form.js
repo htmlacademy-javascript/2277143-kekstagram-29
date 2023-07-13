@@ -1,5 +1,5 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
-import {resetEffects} from './get-effect.js';
+import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
 
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
@@ -33,6 +33,7 @@ function closeForm () {
   smallerButton.removeEventListener('click', onSmallerButtonClick);
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
+  effectsContainer.removeEventListener('change', changeFilters);
 }
 
 const openForm = function() {
@@ -42,6 +43,7 @@ const openForm = function() {
   closeButton.addEventListener('click', closeForm);
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
+  effectsContainer.addEventListener('change', changeFilters);
 };
 
 /**
