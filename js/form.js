@@ -39,7 +39,11 @@ const openForm = function() {
 /**
  * открытие формы
  */
-uploadInput.addEventListener('change', openForm);
+const onUploadFoto = function() {
+  uploadInput.addEventListener('change', openForm);
+};
+
+export {onUploadFoto};
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -48,7 +52,7 @@ const pristine = new Pristine(uploadForm, {
 
 /**
  *
- * @returns  Проверяем массив на валидацию
+ * @returns boolean, Проверяем массив на валидацию
  */
 const validateHashtag = function () {
   if(inputHashtag.value === '') {
