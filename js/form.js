@@ -1,3 +1,4 @@
+import {resetScale} from './scale-of-image.js';
 
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
@@ -27,6 +28,7 @@ function closeForm () {
   uploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onFormEsc);
   closeButton.removeEventListener('click', closeForm);
+  resetScale();
 }
 
 const openForm = function() {
