@@ -1,4 +1,4 @@
-import {resetScale} from './scale-of-image.js';
+import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
 
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
@@ -29,6 +29,8 @@ function closeForm () {
   document.removeEventListener('keydown', onFormEsc);
   closeButton.removeEventListener('click', closeForm);
   resetScale();
+  smallerButton.removeEventListener('click', onSmallerButtonClick);
+  biggerButton.removeEventListener('click', onBiggerButtonClick);
 }
 
 const openForm = function() {
@@ -36,6 +38,8 @@ const openForm = function() {
   uploadOverlay.classList.remove('hidden');
   document.addEventListener('keydown', onFormEsc);
   closeButton.addEventListener('click', closeForm);
+  smallerButton.addEventListener('click', onSmallerButtonClick);
+  biggerButton.addEventListener('click', onBiggerButtonClick);
 };
 
 /**
