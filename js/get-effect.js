@@ -104,7 +104,9 @@ const changeFilters = (evt) => {
  */
 const onUpdateSlider = () => {
   const sliderValue = sliderElement.noUiSlider.get();
-  uploadImagePreview.style.filter = isDefault() ? defaultOnFilter.style : `${filterCurrent.style}(${sliderValue}${filterCurrent.unit})`;
+  uploadImagePreview.style.filter = isDefault()
+    ? defaultOnFilter.style
+    : `${filterCurrent.style}(${sliderValue}${filterCurrent.unit})`;
   effectValue.value = sliderValue;
 };
 
