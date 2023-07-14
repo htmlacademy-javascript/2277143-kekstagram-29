@@ -104,7 +104,8 @@ function fillComments({comments}) {
 * @param {object} item - объект одной картинки, которую мы генирировали в data. Сюда передается именно объект той миниатюры по который мы кликнули. Передаем сюда этот объект в файле main.js
 */
 const openModal = function(element, photo) {
-  element.addEventListener('click', () => {
+  element.addEventListener('click', (evt) => {
+    evt.preventDefault();
     commentsContainerBigPhoto.innerHTML = '';
     commentsCountBigPhoto.classList.remove('hidden');
     commentsLoaderBigPhoto.classList.remove('hidden');
