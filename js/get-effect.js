@@ -5,7 +5,7 @@ const FILTERS = [
     min: 0,
     max: 100,
     step: 1,
-    unit:'',
+    unit: '',
   },
   {
     name: 'chrome',
@@ -13,7 +13,7 @@ const FILTERS = [
     min: 0,
     max: 1,
     step: 0.1,
-    unit:'',
+    unit: '',
   },
   {
     name: 'sepia',
@@ -21,7 +21,7 @@ const FILTERS = [
     min: 0,
     max: 1,
     step: 0.1,
-    unit:'',
+    unit: '',
   },
   {
     name: 'marvin',
@@ -29,7 +29,7 @@ const FILTERS = [
     min: 0,
     max: 100,
     step: 1,
-    unit:'%',
+    unit: '%',
   },
   {
     name: 'phobos',
@@ -37,7 +37,7 @@ const FILTERS = [
     min: 0,
     max: 3,
     step: 0.1,
-    unit:'px',
+    unit: 'px',
   },
   {
     name: 'heat',
@@ -45,7 +45,7 @@ const FILTERS = [
     min: 1,
     max: 3,
     step: 0.1,
-    unit:'',
+    unit: '',
   }
 ];
 
