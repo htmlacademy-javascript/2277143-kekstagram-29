@@ -54,8 +54,6 @@ const onUploadFoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
 
-export {onUploadFoto};
-
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -117,3 +115,5 @@ uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
   }
 });
+
+export {onUploadFoto};
