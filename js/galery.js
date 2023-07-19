@@ -21,4 +21,4 @@ const renderGallery = (data) => {
   createThumbnails(data);
 };
 
-export { renderGallery };
+export {renderGallery};

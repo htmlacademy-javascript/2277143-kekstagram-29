@@ -1,6 +1,6 @@
-const quantityObjectsInArray = 25;
-
-const createInfoPhoto = function() {
+/*const quantityObjectsInArray = 25;*/
+// !!!!! Пробуем не использовать массив 25, если будет ошибка то- const constructPicturesArray = createInfoPhotos();
+/*const createInfoPhoto = function() {
   return {
     id: '',
     url: '',
@@ -8,13 +8,13 @@ const createInfoPhoto = function() {
     likes: '',
     comments: []
   };
-};
-
+};*/
+/*
 const createInfoPhotos = () => (Array.from({length: quantityObjectsInArray}, createInfoPhoto));
-
+*/
 const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const constructPicturesArray = createInfoPhotos();
+//const constructPicturesArray = createInfoPhoto();
 const photosFragment = document.createDocumentFragment();
 
 /**
@@ -34,4 +34,4 @@ const createThumbnails = (data) => {
   photoContainer.appendChild(photosFragment);
 };
 
-export {constructPicturesArray, createThumbnails};
+export {createThumbnails};

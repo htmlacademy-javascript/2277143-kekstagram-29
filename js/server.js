@@ -1,4 +1,3 @@
-
 const URL_BASE = 'https://29.javascript.pages.academy/kekstagram';
 
 const Route = {
