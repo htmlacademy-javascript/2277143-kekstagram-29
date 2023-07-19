@@ -131,7 +131,6 @@ noUiSlider.create(sliderElement, {
 });
 closeSlider();
 
-//effectsContainer.addEventListener('change', changeFilters);
 sliderElement.noUiSlider.on('update', onUpdateSlider);
 
 export {resetEffects, effectsContainer, changeFilters};
