@@ -13,7 +13,7 @@ const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
 
 const submitButton = uploadForm.querySelector('.img-upload__submit');
-/** Текст на кнопке отправки формы. Меняется в зависимости от процесса отправки */
+
 const SubmitButtonText = {
   REST: 'Сохранить',
   SENDING: 'Сохраняю...'
@@ -129,8 +129,6 @@ const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = SubmitButtonText.REST;
 };
-
-
 
 const createSendForm = (cb) => {
   uploadForm.addEventListener('submit', async (evt) => {

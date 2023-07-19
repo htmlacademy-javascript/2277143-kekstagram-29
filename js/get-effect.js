@@ -54,7 +54,6 @@ const effectValue = document.querySelector('.effect-level__value');
 const effectsContainer = document.querySelector('.effects');
 const sliderElementContainer = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
-
 const defaultOnFilter = FILTERS[0];
 let filterCurrent = defaultOnFilter;
 

@@ -1,4 +1,15 @@
-import {createInfoPhotos} from './data.js';
+const createInfoPhoto = function() {
+  return {
+    id: '',
+    url: '',
+    description: '',
+    likes: '',
+    comments: []
+  };
+};
+
+const quantityObjectsInArray = 25;
+const createInfoPhotos = () => (Array.from({length: quantityObjectsInArray}, createInfoPhoto));
 
 const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
