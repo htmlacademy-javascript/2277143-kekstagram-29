@@ -1,3 +1,5 @@
+const quantityObjectsInArray = 25;
+
 const createInfoPhoto = function() {
   return {
     id: '',
@@ -8,7 +10,6 @@ const createInfoPhoto = function() {
   };
 };
 
-const quantityObjectsInArray = 25;
 const createInfoPhotos = () => (Array.from({length: quantityObjectsInArray}, createInfoPhoto));
 
 const photoContainer = document.querySelector('.pictures');
