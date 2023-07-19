@@ -42,7 +42,10 @@ function closeForm () {
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
   effectsContainer.removeEventListener('change', changeFilters);
+
+
 }
+
 
 const openForm = function() {
   body.classList.add('modal-open');
@@ -74,9 +77,6 @@ const validateHashtag = function () {
   if(inputHashtag.value === '') {
     return true;
   }
-  // if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
-  //   inputHashtag.value = inputHashtag.value.slice(0, -1);
-  //}
   const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
   const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== ''); //!!!! NAME
   const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' '); //!!!! NAME
