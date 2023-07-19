@@ -1,4 +1,4 @@
-import { openModal } from './modal.js';
+import {openModal} from './modal.js';
 import {createThumbnails} from './get-pictures.js';
 
 // Глобальные переменные

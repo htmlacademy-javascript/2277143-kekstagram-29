@@ -126,10 +126,4 @@ const openModal = function(photo) {
   closeButton.addEventListener('click', closeModal);
 };
 
-//const openPhoto = function() {
-//  minArrPhotos.forEach((photo, index) => {
-//    openModal(photo, rowArray[index]);
-//  });
-//};
-
 export {openModal};
