@@ -101,38 +101,35 @@ function fillComments({comments}) {
 /**
 Функция открытия большой картинки при клике на миниатюру
 * @param {string} picture - DOM элемент миниатюры, по который мы кликнули
-* @param {object} item - объект одной картинки, которую мы генирировали в data. Сюда передается именно объект той миниатюры по который мы кликнули. Передаем сюда этот объект в файле main.js
+* @param {object} photo - объект одной картинки, которую мы генирировали в data. Сюда передается именно объект той миниатюры по который мы кликнули. Передаем сюда этот объект в файле main.js
 */
-const openModal = function(element, photo) {
-  element.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    commentsContainerBigPhoto.innerHTML = '';
-    commentsCountBigPhoto.classList.remove('hidden');
-    commentsLoaderBigPhoto.classList.remove('hidden');
+const openModal = function(photo) {
+  commentsContainerBigPhoto.innerHTML = '';
+  commentsCountBigPhoto.classList.remove('hidden');
+  commentsLoaderBigPhoto.classList.remove('hidden');
 
-    // Тут мы созданному массиву присваиваем массив комментариев из объектаù
-    commentsShowArray = photo.comments;
-    body.classList.add('modal-open');
-    bigPhoto.classList.remove('hidden');
-    imgBigPhoto.src = photo.url;
-    likesBigPhoto.textContent = photo.likes;
-    commentsNumberBigPhoto.textContent = photo.comments.length;
-    descriptionBigPhoto.textContent = photo.description;
+  // Тут мы созданному массиву присваиваем массив комментариев из объектаù
+  commentsShowArray = photo.comments;
+  body.classList.add('modal-open');
+  bigPhoto.classList.remove('hidden');
+  imgBigPhoto.src = photo.url;
+  likesBigPhoto.textContent = photo.likes;
+  commentsNumberBigPhoto.textContent = photo.comments.length;
+  descriptionBigPhoto.textContent = photo.description;
 
-    // При открытие вешаем на кнопку "Загрузить еще" обработчик, которые будет дорисовывать комментарии
-    commentsLoaderBigPhoto.addEventListener('click', showMoreComments);
+  // При открытие вешаем на кнопку "Загрузить еще" обработчик, которые будет дорисовывать комментарии
+  commentsLoaderBigPhoto.addEventListener('click', showMoreComments);
 
-    // Вызываем функцию отрисовки начальных комментариев
-    fillComments(photo);
-    document.addEventListener('keydown', onPictureEsc);
-    closeButton.addEventListener('click', closeModal);
-  });
+  // Вызываем функцию отрисовки начальных комментариев
+  fillComments(photo);
+  document.addEventListener('keydown', onPictureEsc);
+  closeButton.addEventListener('click', closeModal);
 };
 
-const openPhoto = function() {
-  minArrPhotos.forEach((photo, index) => {
-    openModal(photo, rowArray[index]);
-  });
-};
+//const openPhoto = function() {
+//  minArrPhotos.forEach((photo, index) => {
+//    openModal(photo, rowArray[index]);
+//  });
+//};
 
-export {openPhoto};
+export {openModal};

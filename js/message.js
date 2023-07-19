@@ -3,7 +3,7 @@ const errorMessage = document.querySelector('#error').content.querySelector('.er
 const body = document.querySelector('body');
 
 function hideMessage() {
-  const messageElement = document.querySelector('.seccuss') || document.querySelector('.error');
+  const messageElement = document.querySelector('.success') || document.querySelector('.error');
   messageElement.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
   body.removeEventListener('click', onBodyClick);
@@ -45,6 +45,4 @@ const showErrorMessage = () => {
 
 export {showSuccessMessage, showErrorMessage};
 
-
 //console.log();
-
