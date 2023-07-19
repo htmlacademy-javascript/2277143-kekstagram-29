@@ -1,9 +1,9 @@
-import {constructPicturesArray} from './get-pictures.js';
+//import {constructPicturesArray} from './get-pictures.js';
 
 const COMMENT_PER_PORTION = 5;
-const rowArray = constructPicturesArray;
+//const rowArray = constructPicturesArray;
 const body = document.querySelector('body');
-const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
+//const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
 const bigPhoto = document.querySelector('.big-picture'); // modal
 const closeButton = bigPhoto.querySelector('.big-picture__cancel'); // кнопка закрыть
 

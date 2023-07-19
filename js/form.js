@@ -74,12 +74,14 @@ const validateHashtag = function () {
   if(inputHashtag.value === '') {
     return true;
   }
-  if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
-    inputHashtag.value = inputHashtag.value.slice(0, -1);
-  }
-  const hashtags = inputHashtag.value.toLowerCase().split(' ');
-  for (let i = 0; i < hashtags.length; i++) {
-    if (!rulesHashtag.test(hashtags[i]) || hashtags.indexOf(hashtags[i]) !== i || hashtags.length > numberOfHashtag) {
+  // if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
+  //   inputHashtag.value = inputHashtag.value.slice(0, -1);
+  //}
+  const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
+  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== ''); //!!!! NAME
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' '); //!!!! NAME
+  for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
+    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
       return false;
     }
   }
@@ -92,18 +94,20 @@ const validateHashtag = function () {
 const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
+  const arrHashtagsNoNothink = arrHashtags.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
   let messageOne = '';
   let messageTwo = '';
   let messageThree = '';
   let errorMessage = '';
-  for (let i = 0; i < arrHashtags.length; i++) {
-    if(!rulesHashtag.test(arrHashtags[i])) {
+  for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
+    if(!rulesHashtag.test(arrHashtagsNoSpace[i])) {
       messageOne = 'введён невалидный хэш-тег\n';
     }
-    if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
+    if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtags.length > 5) {
+    if(arrHashtagsNoSpace.length > 5) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
