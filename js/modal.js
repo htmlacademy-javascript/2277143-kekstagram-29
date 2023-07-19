@@ -2,12 +2,10 @@ const COMMENT_PER_PORTION = 5;
 const body = document.querySelector('body');
 const bigPhoto = document.querySelector('.big-picture');
 const closeButton = bigPhoto.querySelector('.big-picture__cancel');
-
 const likesBigPhoto = bigPhoto.querySelector('.likes-count');
 const imgBigPhoto = bigPhoto.querySelector('.big-picture__img img');
 const commentsNumberBigPhoto = bigPhoto.querySelector('.comments-count');
 const descriptionBigPhoto = bigPhoto.querySelector('.social__caption');
-
 const commentsContainerBigPhoto = bigPhoto.querySelector('.social__comments');
 const commentsCountBigPhoto = bigPhoto.querySelector('.social__comment-count');
 const commentsLoaderBigPhoto = bigPhoto.querySelector('.comments-loader');

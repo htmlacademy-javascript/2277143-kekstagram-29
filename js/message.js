@@ -16,14 +16,14 @@ const onSuccessDocumentClick = (evt)=>{
   }
 };
 
-const onSuccesButtonClick = ()=>closeSuccessMessage();
-const onCloseSuccessMessage = (evt)=>onDocumentKeydown(evt,closeSuccessMessage);
-function closeSuccessMessage (){
+const onSuccesButtonClick = () => closeSuccessMessage();
+const onCloseSuccessMessage = (evt) => onDocumentKeydown(evt,closeSuccessMessage);
+function closeSuccessMessage () {
   document.body.querySelector('.success').remove();
   document.body.removeEventListener('click',onSuccessDocumentClick);
   document.body.removeEventListener('keydown', onCloseSuccessMessage);
 }
-const showSuccessMessage = ()=>{
+const showSuccessMessage = () => {
   const successBlock = successTemplate.cloneNode(true);
   document.body.append(successBlock);
   successBlock.querySelector('.success__button').addEventListener('click', onSuccesButtonClick);
@@ -31,14 +31,14 @@ const showSuccessMessage = ()=>{
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
 
-const onErrorDocumentClick = (evt)=>{
+const onErrorDocumentClick = (evt) => {
   evt.preventDefault();
   if (!evt.target.closest('.error__inner')){
     closeErrorMessage();
   }
 };
 const onErrorButtonclick = () => closeErrorMessage();
-const onCloseErrorMessage = (evt)=>onDocumentKeydown(evt,closeErrorMessage);
+const onCloseErrorMessage = (evt) => onDocumentKeydown(evt,closeErrorMessage);
 function closeErrorMessage (){
   document.body.querySelector('.error').remove();
   document.body.classList.remove('has-modal');
@@ -46,7 +46,7 @@ function closeErrorMessage (){
   document.removeEventListener('keydown', onCloseErrorMessage);
 }
 
-const showErrorMessage = ()=>{
+const showErrorMessage = () => {
   const errorBlock = errorTemplate.cloneNode(true);
   const errorButton = errorBlock.querySelector('.error__button');
   document.body.append(errorBlock);

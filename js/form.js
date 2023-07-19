@@ -11,7 +11,6 @@ const textAreaDescripton = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
-
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
 const SubmitButtonText = {
@@ -76,8 +75,8 @@ const validateHashtag = function () {
     return true;
   }
   const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
-  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== ''); //!!!! NAME
-  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' '); //!!!! NAME
+  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
   for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
     if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
       return false;
