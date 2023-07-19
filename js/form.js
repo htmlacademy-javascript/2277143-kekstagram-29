@@ -19,6 +19,11 @@ const SubmitButtonText = {
   SENDING: 'Сохраняю...'
 };
 
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
+}, false);
+
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
@@ -42,10 +47,8 @@ function closeForm () {
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
   effectsContainer.removeEventListener('change', changeFilters);
-
-
+  pristine.reset();
 }
-
 
 const openForm = function() {
   body.classList.add('modal-open');
@@ -63,11 +66,6 @@ const openForm = function() {
 const onUploadFoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
-
-const pristine = new Pristine(uploadForm, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-}, false);
 
 /**
  *
