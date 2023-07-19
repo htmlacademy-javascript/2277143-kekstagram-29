@@ -12,6 +12,13 @@ const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
 
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+/** Текст на кнопке отправки формы. Меняется в зависимости от процесса отправки */
+const SubmitButtonText = {
+  REST: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
@@ -109,11 +116,32 @@ pristine.addValidator(inputHashtag,
   getErrorMessages
 );
 
-uploadForm.addEventListener('submit', (evt) => {
-  const isValidate = pristine.validate();
-  if(!isValidate) {
-    evt.preventDefault();
-  }
-});
 
-export {onUploadFoto};
+/** Блокировка кнопки отправки формы */
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+/** Разблокировка кнопки отправки формы */
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.REST;
+};
+
+
+const createSendForm = (cb) => {
+  uploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValidate = pristine.validate();
+
+    if(isValidate) {
+      blockSubmitButton();
+      await cb(new FormData(uploadForm));
+      unblockSubmitButton();
+    }
+  });
+};
+
+
+export {onUploadFoto, createSendForm, closeForm};
