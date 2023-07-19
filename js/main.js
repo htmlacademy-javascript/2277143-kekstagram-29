@@ -1,4 +1,4 @@
-import {onUploadFoto, createSendForm, closeForm} from './form.js';
+import {onUploadFoto, createSendForm, closeForm, unblockSubmitButton} from './form.js';
 import './get-effect.js';
 import {renderGallery} from './galery.js';
 import { getData, sendData } from './server.js';
@@ -13,6 +13,8 @@ createSendForm(async (data) => {
     showSuccessMessage();
   } catch {
     showErrorMessage();
+  } finally {
+    unblockSubmitButton();
   }
 });
 

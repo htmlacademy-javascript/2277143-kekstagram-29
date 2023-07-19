@@ -30,7 +30,6 @@ const onFormEsc = function(evt) {
     if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
       closeForm();
     }
-    uploadForm.reset();
   }
 };
 
@@ -48,6 +47,7 @@ function closeForm () {
   resetEffects();
   effectsContainer.removeEventListener('change', changeFilters);
   pristine.reset();
+  uploadForm.reset();
 }
 
 const openForm = function() {
@@ -118,7 +118,6 @@ pristine.addValidator(inputHashtag,
   getErrorMessages
 );
 
-
 /** Блокировка кнопки отправки формы */
 const blockSubmitButton = () => {
   submitButton.disabled = true;
@@ -130,6 +129,7 @@ const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = SubmitButtonText.REST;
 };
+
 
 
 const createSendForm = (cb) => {
@@ -145,5 +145,4 @@ const createSendForm = (cb) => {
   });
 };
 
-
-export {onUploadFoto, createSendForm, closeForm};
+export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton};
