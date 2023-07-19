@@ -12,13 +12,24 @@ const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
 
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+/** Текст на кнопке отправки формы. Меняется в зависимости от процесса отправки */
+const SubmitButtonText = {
+  REST: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper',
+}, false);
+
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
     if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
       closeForm();
     }
-    uploadForm.reset();
   }
 };
 
@@ -35,6 +46,8 @@ function closeForm () {
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
   effectsContainer.removeEventListener('change', changeFilters);
+  pristine.reset();
+  uploadForm.reset();
 }
 
 const openForm = function() {
@@ -54,13 +67,6 @@ const onUploadFoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
 
-export {onUploadFoto};
-
-const pristine = new Pristine(uploadForm, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-}, false);
-
 /**
  *
  * @returns boolean, Проверяем массив на валидацию
@@ -69,12 +75,11 @@ const validateHashtag = function () {
   if(inputHashtag.value === '') {
     return true;
   }
-  if(inputHashtag.value.charAt(inputHashtag.value.length - 1) === ' ') {
-    inputHashtag.value = inputHashtag.value.slice(0, -1);
-  }
-  const hashtags = inputHashtag.value.toLowerCase().split(' ');
-  for (let i = 0; i < hashtags.length; i++) {
-    if (!rulesHashtag.test(hashtags[i]) || hashtags.indexOf(hashtags[i]) !== i || hashtags.length > numberOfHashtag) {
+  const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
+  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== ''); //!!!! NAME
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' '); //!!!! NAME
+  for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
+    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
       return false;
     }
   }
@@ -87,18 +92,20 @@ const validateHashtag = function () {
 const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
+  const arrHashtagsNoNothink = arrHashtags.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
   let messageOne = '';
   let messageTwo = '';
   let messageThree = '';
   let errorMessage = '';
-  for (let i = 0; i < arrHashtags.length; i++) {
-    if(!rulesHashtag.test(arrHashtags[i])) {
+  for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
+    if(!rulesHashtag.test(arrHashtagsNoSpace[i])) {
       messageOne = 'введён невалидный хэш-тег\n';
     }
-    if(arrHashtags.indexOf(arrHashtags[i]) !== i) {
+    if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtags.length > 5) {
+    if(arrHashtagsNoSpace.length > 5) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
@@ -111,9 +118,31 @@ pristine.addValidator(inputHashtag,
   getErrorMessages
 );
 
-uploadForm.addEventListener('submit', (evt) => {
-  const isValidate = pristine.validate();
-  if(!isValidate) {
+/** Блокировка кнопки отправки формы */
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+/** Разблокировка кнопки отправки формы */
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.REST;
+};
+
+
+
+const createSendForm = (cb) => {
+  uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-  }
-});
+    const isValidate = pristine.validate();
+
+    if(isValidate) {
+      blockSubmitButton();
+      await cb(new FormData(uploadForm));
+      unblockSubmitButton();
+    }
+  });
+};
+
+export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton};
