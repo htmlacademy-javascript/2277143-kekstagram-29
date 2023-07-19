@@ -1,4 +1,3 @@
-//модуль по работе с сообщениями при отправке формы
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
@@ -8,8 +7,7 @@ function onDocumentKeydown(evt,cb){
     cb();
   }
 }
-//реализация показа успешной отправки сообщения
-//закрытие по нажатию на тело документа вне сообщения
+
 const onSuccessDocumentClick = (evt)=>{
   evt.preventDefault();
 
@@ -17,7 +15,8 @@ const onSuccessDocumentClick = (evt)=>{
     closeSuccessMessage();
   }
 };
-const onSuccesButtonClick = ()=>closeSuccessMessage();//закрытие по кнопке
+
+const onSuccesButtonClick = ()=>closeSuccessMessage();
 const onCloseSuccessMessage = (evt)=>onDocumentKeydown(evt,closeSuccessMessage);
 function closeSuccessMessage (){
   document.body.querySelector('.success').remove();
@@ -32,8 +31,6 @@ const showSuccessMessage = ()=>{
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
 
-//реализация окна с показом ошибки
-//закрытие окна по щелчку вне области сообщения
 const onErrorDocumentClick = (evt)=>{
   evt.preventDefault();
   if (!evt.target.closest('.error__inner')){
@@ -57,7 +54,6 @@ const showErrorMessage = ()=>{
   errorButton.addEventListener('click',onErrorButtonclick);
   document.body.addEventListener('keydown',onCloseErrorMessage);
   document.body.addEventListener('click',onErrorDocumentClick);
-
 };
 
 export{showSuccessMessage,showErrorMessage};
