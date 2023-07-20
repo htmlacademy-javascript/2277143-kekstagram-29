@@ -1,5 +1,6 @@
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+import {onFormEsc} from './form.js';
 
 function onDocumentKeydown(evt,cb){
   if (evt.key === 'Escape') {
@@ -44,6 +45,7 @@ function closeErrorMessage (){
   document.body.classList.remove('has-modal');
   document.body.removeEventListener('click',onErrorDocumentClick);
   document.removeEventListener('keydown', onCloseErrorMessage);
+  //document.addEventListener('keydown', onFormEsc);
 }
 
 const showErrorMessage = () => {
@@ -54,6 +56,7 @@ const showErrorMessage = () => {
   errorButton.addEventListener('click',onErrorButtonclick);
   document.body.addEventListener('keydown',onCloseErrorMessage);
   document.body.addEventListener('click',onErrorDocumentClick);
+  document.removeEventListener('keydown', onFormEsc);
 };
 
 export{showSuccessMessage,showErrorMessage};

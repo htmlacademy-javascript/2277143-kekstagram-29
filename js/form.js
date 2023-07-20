@@ -1,5 +1,6 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
 import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
@@ -159,4 +160,4 @@ const onFileInputChange = () => {
 
 uploadInput.addEventListener('change', onFileInputChange);
 
-export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton};
+export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};
