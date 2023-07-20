@@ -56,30 +56,23 @@ function showMoreComments () {
   if (!commentsShowArray.length) {
     return;
   }
-  const additionalComments = commentsShowArray.slice(commentsContainerBigPhoto.children.
-    length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
-
+  const additionalComments = commentsShowArray.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
   createPictureComments(additionalComments);
-
-  commentsCountBigPhoto.innerHtml =
-   `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${commentsShowArray.length}</span> комментариев`;
-
+  commentsCountBigPhoto.innerHTML = `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${commentsShowArray.length}</span> комментариев`;
   if (commentsShowArray.length <= commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
 
 /**
-Функция отрисовки начальных комментариев. Именно тех, которые первые пять штук отрисовываются при открытие модального окна
-* @param {array} comments - массив комментариев из объекта, дестроктуризация тут
+Отрисовка начальных комментариев
+* @param {array} comments - массив комментариев из объекта
 */
 function fillComments({comments}) {
   const showFirstComments = comments.slice(0, COMMENT_PER_PORTION);
   createPictureComments(showFirstComments);
-  commentsCountBigPhoto.innerHtml = `${showFirstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
-
+  commentsCountBigPhoto.innerHTML = `${showFirstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
   if (showFirstComments.length >= comments.length) {
-    commentsCountBigPhoto.classList.add('hidden');
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
