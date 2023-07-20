@@ -61,8 +61,8 @@ function showMoreComments () {
 
   createPictureComments(additionalComments);
 
-  commentsCountBigPhoto.textContent =
-   `${commentsContainerBigPhoto.children.length} из ${commentsShowArray.length} комментариев`;
+  commentsCountBigPhoto.innerHtml =
+   `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${commentsShowArray.length}</span> комментариев`;
 
   if (commentsShowArray.length <= commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
@@ -76,7 +76,7 @@ function showMoreComments () {
 function fillComments({comments}) {
   const showFirstComments = comments.slice(0, COMMENT_PER_PORTION);
   createPictureComments(showFirstComments);
-  commentsCountBigPhoto.textContent = `${showFirstComments.length} из ${comments.length} комментариев`;
+  commentsCountBigPhoto.innerHtml = `${showFirstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
 
   if (showFirstComments.length >= comments.length) {
     commentsCountBigPhoto.classList.add('hidden');
