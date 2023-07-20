@@ -1,9 +1,10 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
 import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
-
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
 const uploadInput = upload.querySelector('.img-upload__input');
+const imageElement = document.querySelector('.img-upload__preview img');
 const uploadOverlay = upload.querySelector('.img-upload__overlay');
 const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
@@ -12,6 +13,7 @@ const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
 const submitButton = uploadForm.querySelector('.img-upload__submit');
+const effects = document.querySelectorAll('.effects__preview');
 
 const SubmitButtonText = {
   REST: 'Сохранить',
@@ -141,5 +143,20 @@ const createSendForm = (cb) => {
     }
   });
 };
+
+const onFileInputChange = () => {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if(matches) {
+    imageElement.src = URL.createObjectURL(file);
+    effects.forEach((item) => (item.style.backgroundImage = `url(${imageElement.src})`));
+    openForm();
+  }
+};
+
+uploadInput.addEventListener('change', onFileInputChange);
 
 export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton};
