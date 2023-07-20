@@ -4,6 +4,7 @@ import {renderGallery} from './galery.js';
 import {getData, sendData} from './server.js';
 import {showAlert} from './alert.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
+import { setDelayedFilter, getFilters} from './filters.js';
 
 createSendForm(async (data) => {
   try {
@@ -20,6 +21,8 @@ createSendForm(async (data) => {
 try {
   const data = await getData();
   renderGallery(data);
+  getFilters();
+  setDelayedFilter(data);
 } catch (err) {
   showAlert(err.message);
 }
