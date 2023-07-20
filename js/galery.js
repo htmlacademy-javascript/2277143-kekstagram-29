@@ -4,6 +4,8 @@ import {createThumbnails} from './get-pictures.js';
 // Глобальные переменные
 const container = document.querySelector('.pictures');
 
+let clickHandler;
+
 const renderModal = (evt, pictures) => {
   const target = evt.target.closest('[data-id]');
   if (!target) {
@@ -15,7 +17,6 @@ const renderModal = (evt, pictures) => {
 
 /** Создание галереи */
 const renderGallery = (data) => {
-  container.addEventListener('click', (evt) => {
     renderModal(evt, data);
   });
   createThumbnails(data);
