@@ -2,7 +2,7 @@ import {onUploadFoto, createSendForm, closeForm, unblockSubmitButton} from './fo
 import './get-effect.js';
 import {renderGallery} from './galery.js';
 import {getData, sendData} from './server.js';
-import {showAlert} from './alert.js';
+import {showAlert} from './util.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
 import { setDelayedFilter, getFilters} from './filters.js';
 
