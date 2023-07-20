@@ -17,8 +17,20 @@ const renderModal = (evt, pictures) => {
 
 /** Создание галереи */
 const renderGallery = (data) => {
+
+  // Удаляем предыдущий обработчик, если он был
+  if (clickHandler) {
+    container.removeEventListener('click', clickHandler);
+  }
+
+  // Создаем новый обработчик
+  clickHandler = (evt) => {
     renderModal(evt, data);
-  });
+  };
+
+  // Добавляем новый обработчик
+  container.addEventListener('click', clickHandler);
+
   createThumbnails(data);
 };
 
