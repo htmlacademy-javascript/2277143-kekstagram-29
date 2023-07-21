@@ -8,7 +8,6 @@ const debounce = (callback, timeoutDelay = 500) => {
 };
 
 //alert
-
 const ALERT_SHOW_TIME = 5000;
 const showAlert = (message) => {
   const alert = document.createElement('div');
