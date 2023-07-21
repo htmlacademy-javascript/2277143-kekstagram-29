@@ -2,7 +2,7 @@ import {renderGallery} from './galery.js';
 import {debounce} from './util.js';
 
 const PHOTO_COUNT = 10;
-const DEBOUNCR_TIME = 500;
+const DEBOUNCE_TIME = 500;
 
 const imgFilters = document.querySelector('.img-filters');
 const imgForm = document.querySelector('.img-filters__form');
@@ -31,20 +31,26 @@ const filtersPictures = (pictures, choiceButton) => {
 const removePictures = () =>
   document.querySelectorAll('.picture').forEach((picture) => picture.remove());
 
+const updateGallery = (pictures) => {
+  removePictures();
+  renderGallery(pictures);
+};
+
+const debouncedRenderGallery = debounce(updateGallery, DEBOUNCE_TIME);
+
 /** обработчик клика */
 const onFilterClick = (evt, pictures) => {
   filterButtons.forEach((button) => button.classList.remove('img-filters__button--active'));
 
   const filterButton = evt.target;
   filterButton.classList.add('img-filters__button--active');
-  removePictures();
-  renderGallery(filtersPictures(pictures, filterButton));
+  debouncedRenderGallery(filtersPictures(pictures, filterButton));
 };
 
 /** устанавливает дебаунс */
 const setDelayedFilter = (pictures) => {
-  imgForm.addEventListener('click', debounce((evt) => {
+  imgForm.addEventListener('click', (evt) => {
     onFilterClick(evt, pictures);
-  }, DEBOUNCR_TIME));
+  });
 };
 export {setDelayedFilter, getFilters};
