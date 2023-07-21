@@ -11,21 +11,24 @@ const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
 const textAreaDescripton = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
-const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-const numberOfHashtag = 5;
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const effects = document.querySelectorAll('.effects__preview');
+const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const numberOfHashtag = 5;
 
+/** тексты кнопки  */
 const SubmitButtonText = {
   REST: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
 
+/** валидатор формы */
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
 }, false);
 
+/** обработчик Escape */
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
@@ -35,6 +38,7 @@ const onFormEsc = function(evt) {
   }
 };
 
+/** скрывает форму */
 function closeForm () {
   uploadInput.value = '';
   textAreaDescripton.value = '';
@@ -52,6 +56,7 @@ function closeForm () {
   uploadForm.reset();
 }
 
+/** показывает форму */
 const openForm = function() {
   body.classList.add('modal-open');
   uploadOverlay.classList.remove('hidden');
@@ -62,9 +67,7 @@ const openForm = function() {
   effectsContainer.addEventListener('change', changeFilters);
 };
 
-/**
- * открытие формы
- */
+/** открытие формы при загрузке файла */
 const onUploadFoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
@@ -88,9 +91,7 @@ const validateHashtag = function () {
   return true;
 };
 
-/**
- * Функция строки ошибки
- */
+/** Функция строки ошибки */
 const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
@@ -132,6 +133,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.REST;
 };
 
+/** обработчик отправки формы */
 const createSendForm = (cb) => {
   uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
@@ -145,10 +147,10 @@ const createSendForm = (cb) => {
   });
 };
 
+/** проверяет загруженный файл */
 const onFileInputChange = () => {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
-
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if(matches) {
