@@ -31,11 +31,13 @@ const filtersPictures = (pictures, choiceButton) => {
 const removePictures = () =>
   document.querySelectorAll('.picture').forEach((picture) => picture.remove());
 
+/** обновляет галерею */
 const updateGallery = (pictures) => {
   removePictures();
   renderGallery(pictures);
 };
 
+/** дебаунс updateGallery */
 const debouncedRenderGallery = debounce(updateGallery, DEBOUNCE_TIME);
 
 /** обработчик клика */
