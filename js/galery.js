@@ -1,11 +1,10 @@
 import {openModal} from './modal.js';
 import {createThumbnails} from './get-pictures.js';
 
-// Глобальные переменные
 const container = document.querySelector('.pictures');
-
 let clickHandler;
 
+/** вызывает модалку */
 const renderModal = (evt, pictures) => {
   const target = evt.target.closest('[data-id]');
   if (!target) {
@@ -15,22 +14,18 @@ const renderModal = (evt, pictures) => {
   openModal(picture);
 };
 
-/** Создание галереи */
+/** создание галереи */
 const renderGallery = (data) => {
-
-  // Удаляем предыдущий обработчик, если он был
+  // удаляем предыдущий обработчик, если он был
   if (clickHandler) {
     container.removeEventListener('click', clickHandler);
   }
-
-  // Создаем новый обработчик
+  // создаем новый обработчик
   clickHandler = (evt) => {
     renderModal(evt, data);
   };
-
-  // Добавляем новый обработчик
+  // добавляем новый обработчик
   container.addEventListener('click', clickHandler);
-
   createThumbnails(data);
 };
 
