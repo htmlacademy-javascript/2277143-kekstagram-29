@@ -9,11 +9,13 @@ const scaleInputElement = document.querySelector('.scale__control--value');
 const smallerButton = document.querySelector('.scale__control--smaller');
 const biggerButton = document.querySelector('.scale__control--bigger');
 
+/** функция для установки масштаба */
 const scaleImage = (value) => {
   imageElement.style.transform = `scale(${value / PERCENT})`;
   scaleInputElement.value = `${value}%`;
 };
 
+/** обработчик клика - */
 const onSmallerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, NUMBER_SYSTEM);
   const newValue = currentValue - SCALE_STEP;
@@ -24,6 +26,7 @@ const onSmallerButtonClick = () => {
   }
 };
 
+/** обработчик клика + */
 const onBiggerButtonClick = () => {
   const currentValue = parseInt(scaleInputElement.value, NUMBER_SYSTEM);
   const newValue = currentValue + SCALE_STEP;
@@ -34,6 +37,7 @@ const onBiggerButtonClick = () => {
   }
 };
 
+/** функция сброса масштаба */
 const resetScale = () => scaleImage(DEFAULT_SCALE);
 
 export {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick};
