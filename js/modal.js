@@ -1,17 +1,11 @@
-//import {constructPicturesArray} from './get-pictures.js';
-
 const COMMENT_PER_PORTION = 5;
-//const rowArray = constructPicturesArray;
 const body = document.querySelector('body');
-//const minArrPhotos = document.querySelectorAll('.picture'); // массив картинок
-const bigPhoto = document.querySelector('.big-picture'); // modal
-const closeButton = bigPhoto.querySelector('.big-picture__cancel'); // кнопка закрыть
-
+const bigPhoto = document.querySelector('.big-picture');
+const closeButton = bigPhoto.querySelector('.big-picture__cancel');
 const likesBigPhoto = bigPhoto.querySelector('.likes-count');
 const imgBigPhoto = bigPhoto.querySelector('.big-picture__img img');
 const commentsNumberBigPhoto = bigPhoto.querySelector('.comments-count');
 const descriptionBigPhoto = bigPhoto.querySelector('.social__caption');
-
 const commentsContainerBigPhoto = bigPhoto.querySelector('.social__comments');
 const commentsCountBigPhoto = bigPhoto.querySelector('.social__comment-count');
 const commentsLoaderBigPhoto = bigPhoto.querySelector('.comments-loader');
@@ -59,41 +53,26 @@ const createPictureComments = function(comments) {
  * функция добавления ещё 5 коментариев
  */
 function showMoreComments () {
-  // Если длинна массива с комментариями равно 0 то ни чего не делаем
   if (!commentsShowArray.length) {
     return;
   }
-  // Обрезаем наш массив с комментариями. Сначала берем то количество комментарием
-  // что уже отрисовано, и прибавляем к ним 5, и получаем новые элементы котоыре
-  // нужно дорисовать в список
-  const additionalComments = commentsShowArray.slice(commentsContainerBigPhoto.children.
-    length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
-
-  // Добовляем комментарии в уже существующий список
+  const additionalComments = commentsShowArray.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
   createPictureComments(additionalComments);
-
-  // Показываем кол-во отрисованных коментариев
-  commentsCountBigPhoto.textContent =
-   `${commentsContainerBigPhoto.children.length} из ${commentsShowArray.length} комментариев`;
-
-  // Если больше отрисовывать нечего, прячем кнопку
+  commentsCountBigPhoto.innerHTML = `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${commentsShowArray.length}</span> комментариев`;
   if (commentsShowArray.length <= commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
 
 /**
-Функция отрисовки начальных комментариев. Именно тех, которые первые пять штук отрисовываются при открытие модального окна
-* @param {array} comments - массив комментариев из объекта, дестроктуризация тут
+Отрисовка начальных комментариев
+* @param {array} comments - массив комментариев из объекта
 */
 function fillComments({comments}) {
   const showFirstComments = comments.slice(0, COMMENT_PER_PORTION);
   createPictureComments(showFirstComments);
-  commentsCountBigPhoto.textContent = `${showFirstComments.length} из ${comments.length} комментариев`;
-
-  // Если изначально у нас меньше или равно 5 комментариев, то прячем кнопку и счетчик комментариев
+  commentsCountBigPhoto.innerHTML = `${showFirstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
   if (showFirstComments.length >= comments.length) {
-    commentsCountBigPhoto.classList.add('hidden');
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
@@ -107,8 +86,6 @@ const openModal = function(photo) {
   commentsContainerBigPhoto.innerHTML = '';
   commentsCountBigPhoto.classList.remove('hidden');
   commentsLoaderBigPhoto.classList.remove('hidden');
-
-  // Тут мы созданному массиву присваиваем массив комментариев из объектаù
   commentsShowArray = photo.comments;
   body.classList.add('modal-open');
   bigPhoto.classList.remove('hidden');
@@ -116,11 +93,7 @@ const openModal = function(photo) {
   likesBigPhoto.textContent = photo.likes;
   commentsNumberBigPhoto.textContent = photo.comments.length;
   descriptionBigPhoto.textContent = photo.description;
-
-  // При открытие вешаем на кнопку "Загрузить еще" обработчик, которые будет дорисовывать комментарии
   commentsLoaderBigPhoto.addEventListener('click', showMoreComments);
-
-  // Вызываем функцию отрисовки начальных комментариев
   fillComments(photo);
   document.addEventListener('keydown', onPictureEsc);
   closeButton.addEventListener('click', closeModal);

@@ -1,29 +1,34 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
 import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
 const uploadInput = upload.querySelector('.img-upload__input');
+const imageElement = document.querySelector('.img-upload__preview img');
 const uploadOverlay = upload.querySelector('.img-upload__overlay');
 const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
 const textAreaDescripton = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+const effects = document.querySelectorAll('.effects__preview');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const numberOfHashtag = 5;
 
-const submitButton = uploadForm.querySelector('.img-upload__submit');
-/** Текст на кнопке отправки формы. Меняется в зависимости от процесса отправки */
+/** тексты кнопки  */
 const SubmitButtonText = {
   REST: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
 
+/** валидатор формы */
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
 }, false);
 
+/** обработчик Escape */
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
@@ -33,6 +38,7 @@ const onFormEsc = function(evt) {
   }
 };
 
+/** скрывает форму */
 function closeForm () {
   uploadInput.value = '';
   textAreaDescripton.value = '';
@@ -50,6 +56,7 @@ function closeForm () {
   uploadForm.reset();
 }
 
+/** показывает форму */
 const openForm = function() {
   body.classList.add('modal-open');
   uploadOverlay.classList.remove('hidden');
@@ -60,9 +67,7 @@ const openForm = function() {
   effectsContainer.addEventListener('change', changeFilters);
 };
 
-/**
- * открытие формы
- */
+/** открытие формы при загрузке файла */
 const onUploadFoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
@@ -76,8 +81,8 @@ const validateHashtag = function () {
     return true;
   }
   const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
-  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== ''); //!!!! NAME
-  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' '); //!!!! NAME
+  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
   for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
     if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
       return false;
@@ -86,9 +91,7 @@ const validateHashtag = function () {
   return true;
 };
 
-/**
- * Функция строки ошибки
- */
+/** Функция строки ошибки */
 const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
@@ -130,8 +133,7 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.REST;
 };
 
-
-
+/** обработчик отправки формы */
 const createSendForm = (cb) => {
   uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
@@ -145,4 +147,19 @@ const createSendForm = (cb) => {
   });
 };
 
-export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton};
+/** проверяет загруженный файл */
+const onFileInputChange = () => {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if(matches) {
+    imageElement.src = URL.createObjectURL(file);
+    effects.forEach((item) => (item.style.backgroundImage = `url(${imageElement.src})`));
+    openForm();
+  }
+};
+
+uploadInput.addEventListener('change', onFileInputChange);
+
+export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};

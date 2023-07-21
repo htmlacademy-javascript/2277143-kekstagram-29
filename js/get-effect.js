@@ -54,22 +54,30 @@ const effectValue = document.querySelector('.effect-level__value');
 const effectsContainer = document.querySelector('.effects');
 const sliderElementContainer = document.querySelector('.img-upload__effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
-
 const defaultOnFilter = FILTERS[0];
 let filterCurrent = defaultOnFilter;
 
+/**
+ * фильтр по умолчанию
+ * */
 const isDefault = () => filterCurrent === defaultOnFilter;
 
+/**
+ * показ слайдера
+*/
 const openSlider = () => {
   sliderElementContainer.classList.remove('hidden');
 };
 
+/**
+ * скрытие слайдера
+ */
 const closeSlider = () => {
   sliderElementContainer.classList.add('hidden');
 };
 
 /**
- * Настройки фильтра
+ * настройки фильтра
  */
 const updateSlider = () => {
   sliderElement.noUiSlider.updateOptions({
@@ -88,7 +96,7 @@ const updateSlider = () => {
 };
 
 /**
- * Смена фильтра
+ * смена фильтра
  */
 const changeFilters = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
@@ -100,7 +108,7 @@ const changeFilters = (evt) => {
 };
 
 /**
- * Получаем и передаем значение слайдера
+ * получаем и передаем значение слайдера
  */
 const onUpdateSlider = () => {
   const sliderValue = sliderElement.noUiSlider.get();
@@ -111,7 +119,7 @@ const onUpdateSlider = () => {
 };
 
 /**
- * Сброс эффектов
+ * сброс эффектов
  */
 const resetEffects = () => {
   filterCurrent = defaultOnFilter;
@@ -119,7 +127,7 @@ const resetEffects = () => {
 };
 
 /**
- * Создаём слайдер
+ * создаём слайдер
  */
 noUiSlider.create(sliderElement, {
   range: {
@@ -132,7 +140,6 @@ noUiSlider.create(sliderElement, {
 });
 closeSlider();
 
-//effectsContainer.addEventListener('change', changeFilters);
 sliderElement.noUiSlider.on('update', onUpdateSlider);
 
 export {resetEffects, effectsContainer, changeFilters};
