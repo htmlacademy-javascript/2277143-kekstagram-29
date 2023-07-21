@@ -9,21 +9,28 @@ function onDocumentKeydown(evt,cb){
   }
 }
 
+/** обработчик клика вне окна */
 const onSuccessDocumentClick = (evt)=>{
   evt.preventDefault();
-
   if (!evt.target.closest('.success__inner')) {
     closeSuccessMessage();
   }
 };
 
+/** обработчик клика на кнопке сообщения*/
 const onSuccesButtonClick = () => closeSuccessMessage();
+
+/** обработчик нажатия Escape */
 const onCloseSuccessMessage = (evt) => onDocumentKeydown(evt,closeSuccessMessage);
+
+/** скрывает сообщение */
 function closeSuccessMessage () {
   document.body.querySelector('.success').remove();
   document.body.removeEventListener('click',onSuccessDocumentClick);
   document.body.removeEventListener('keydown', onCloseSuccessMessage);
 }
+
+/** показывает сообщение */
 const showSuccessMessage = () => {
   const successBlock = successTemplate.cloneNode(true);
   document.body.append(successBlock);
@@ -32,22 +39,29 @@ const showSuccessMessage = () => {
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
 
+/** обработчик клика вне окна */
 const onErrorDocumentClick = (evt) => {
   evt.preventDefault();
   if (!evt.target.closest('.error__inner')){
     closeErrorMessage();
   }
 };
+
+/** обработчик клика на кнопке сообщения*/
 const onErrorButtonclick = () => closeErrorMessage();
+
+/** обработчик нажатия Escape */
 const onCloseErrorMessage = (evt) => onDocumentKeydown(evt,closeErrorMessage);
+
+/** скрывает сообщение */
 function closeErrorMessage (){
   document.body.querySelector('.error').remove();
   document.body.classList.remove('has-modal');
   document.body.removeEventListener('click',onErrorDocumentClick);
   document.removeEventListener('keydown', onCloseErrorMessage);
-  //document.addEventListener('keydown', onFormEsc);
 }
 
+/** показывает сообщение */
 const showErrorMessage = () => {
   const errorBlock = errorTemplate.cloneNode(true);
   const errorButton = errorBlock.querySelector('.error__button');
