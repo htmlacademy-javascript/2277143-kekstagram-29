@@ -1,4 +1,4 @@
-//устранение дребезга
+//** debounce */
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
@@ -7,7 +7,7 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-//alert
+/** alert */
 const ALERT_SHOW_TIME = 5000;
 const showAlert = (message) => {
   const alert = document.createElement('div');
