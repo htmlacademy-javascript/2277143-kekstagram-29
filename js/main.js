@@ -1,10 +1,9 @@
-import {onUploadFoto, createSendForm, closeForm, unblockSubmitButton} from './form.js';
-import './get-effect.js';
+import {createSendForm, closeForm, unblockSubmitButton} from './form.js';
 import {renderGallery} from './galery.js';
 import {getData, sendData} from './server.js';
 import {showAlert} from './util.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';
-import { setDelayedFilter, getFilters} from './filters.js';
+import {setDelayedFilter, getFilters} from './filters.js';
 
 createSendForm(async (data) => {
   try {
@@ -18,7 +17,6 @@ createSendForm(async (data) => {
   }
 });
 
-
 try {
   const data = await getData();
   renderGallery(data);
@@ -27,6 +25,3 @@ try {
 } catch (err) {
   showAlert(err.message);
 }
-
-onUploadFoto();
-
