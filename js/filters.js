@@ -1,54 +1,50 @@
-// Сортировка
-const Sorts = {
-  DEFAULT: 'filter-default',
-  RANDOM: 'filter-random',
-  DISCUSSED: 'filter-discussed'
-};
+import {renderGallery} from './galery.js';
+import {debounce} from './util.js';
 
-/** Количество случайных изображений */
-const QUANTITY_IMAGES = 10;
+const PHOTO_COUNT = 10;
+const DEBOUNCR_TIME = 500;
 
-// Глобальные переменные
-const filterImg = document.querySelector('.img-filters');
-let currentFilter = Sorts.DEFAULT;
-let images = [];
+const imgFilters = document.querySelector('.img-filters');
+const imgForm = document.querySelector('.img-filters__form');
+const defaultFilter = document.querySelector('#filter-default');
+const randomFilter = document.querySelector('#filter-random');
+const commentsFilter = document.querySelector('#filter-discussed');
+const filterButtons = document.querySelectorAll('.img-filters__button');
 
-/** Случайные изображения */
-const getRandomSort = () => Math.random() - 0.5;
+/** показывает фильтры */
+const getFilters = () => imgFilters.classList.remove('img-filters--inactive');
 
-/** Обсуждаемые изображения */
-const getDiscussedSort = (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length;
-
-/** Сортировка изображений */
-const getSortedImages = () => {
-  switch (currentFilter) {
-    case Sorts.RANDOM:
-      return [...images].sort(getRandomSort).slice(0, QUANTITY_IMAGES);
-    case Sorts.DISCUSSED:
-      return [...images].sort(getDiscussedSort);
-    default:
-      return [...images];
+/** сортирует изображения */
+const filtersPictures = (pictures, choiceButton) => {
+  if (choiceButton === defaultFilter) {
+    return pictures;
+  }
+  if (choiceButton === randomFilter) {//Случайные изображения
+    return pictures.slice().sort(() => Math.random() - 0.5).slice(0, PHOTO_COUNT);
+  }
+  if (choiceButton === commentsFilter) {//Обсуждаемые изображения
+    return pictures.slice().sort((a, b) => b.comments.length - a.comments.length);
   }
 };
 
-/** Выбор фильтра по клику */
-const clickedSort = (cb) => {
-  filterImg.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('img-filters__button') && evt.target.id !== currentFilter) {
-      const clickBtn = evt.target;
-      filterImg.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
-      clickBtn.classList.add('img-filters__button--active');
-      currentFilter = clickBtn.id;
-      cb(getSortedImages());
-    }
-  });
+/** удаляет изображения галереи */
+const removePictures = () =>
+  document.querySelectorAll('.picture').forEach((picture) => picture.remove());
+
+/** обработчик клика */
+const onFilterClick = (evt, pictures) => {
+  filterButtons.forEach((button) => button.classList.remove('img-filters__button--active'));
+
+  const filterButton = evt.target;
+  filterButton.classList.add('img-filters__button--active');
+  removePictures();
+  renderGallery(filtersPictures(pictures, filterButton));
 };
 
-/** Показ сортировки */
-const setFilters = (loadedImages, cb) => {
-  filterImg.classList.remove('img-filters--inactive');
-  images = [...loadedImages];
-  clickedSort(cb);
+/** устанавливает дебаунс */
+const setDelayedFilter = (pictures) => {
+  imgForm.addEventListener('click', debounce((evt) => {
+    onFilterClick(evt, pictures);
+  }, DEBOUNCR_TIME));
 };
-
-export {setFilters,getSortedImages};
+export {setDelayedFilter, getFilters};
