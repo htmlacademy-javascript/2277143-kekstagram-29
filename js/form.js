@@ -1,7 +1,15 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
 import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
 
+const NUMBER_OF_HASHTAGS = 5;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+/** тексты кнопки  */
+const SubmitButtonText = {
+  REST: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
 const uploadInput = upload.querySelector('.img-upload__input');
@@ -14,13 +22,6 @@ const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const effects = document.querySelectorAll('.effects__preview');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-const numberOfHashtag = 5;
-
-/** тексты кнопки  */
-const SubmitButtonText = {
-  REST: 'Сохранить',
-  SENDING: 'Сохраняю...'
-};
 
 /** валидатор формы */
 const pristine = new Pristine(uploadForm, {
@@ -84,7 +85,7 @@ const validateHashtag = function () {
   const arrHashtagsNoNothing = hashtagsArr.filter((str) => str.trim() !== '');
   const arrHashtagsNoSpace = arrHashtagsNoNothing.filter((str) => str.trim() !== ' ');
   for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
-    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
+    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > NUMBER_OF_HASHTAGS) {
       return false;
     }
   }
@@ -108,7 +109,7 @@ const getErrorMessages = function () {
     if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtagsNoSpace.length > numberOfHashtag) {
+    if(arrHashtagsNoSpace.length > NUMBER_OF_HASHTAGS) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
