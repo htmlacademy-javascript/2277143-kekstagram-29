@@ -30,13 +30,17 @@ const pristine = new Pristine(uploadForm, {
 }, false);
 
 /** обработчик Escape */
-const onFormEsc = function(evt) {
+const onDocumentKeydown = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
     if(document.activeElement !== textAreaDescription && document.activeElement !== inputHashtag) {
       closeForm();
     }
   }
+};
+
+const onCloseButtonClick = function () {
+  closeForm();
 };
 
 /** скрывает форму */
@@ -46,13 +50,13 @@ function closeForm () {
   inputHashtag.value = '';
   body.classList.remove('modal-open');
   uploadOverlay.classList.add('hidden');
-  document.removeEventListener('keydown', onFormEsc);
-  closeButton.removeEventListener('click', closeForm);
+  document.removeEventListener('keydown', onDocumentKeydown);
+  closeButton.removeEventListener('click', onCloseButtonClick);
   resetScale();
   smallerButton.removeEventListener('click', onSmallerButtonClick);
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
-  effectsContainer.removeEventListener('change', changeFilters);
+  effectsContainer.removeEventListener('change', changeFilters); // onEffectsContainerChange
   pristine.reset();
   uploadForm.reset();
 }
@@ -61,16 +65,16 @@ function closeForm () {
 const openForm = function() {
   body.classList.add('modal-open');
   uploadOverlay.classList.remove('hidden');
-  document.addEventListener('keydown', onFormEsc);
-  closeButton.addEventListener('click', closeForm);
+  document.addEventListener('keydown', onDocumentKeydown);
+  closeButton.addEventListener('click', onCloseButtonClick);
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
-  effectsContainer.addEventListener('change', changeFilters);
+  effectsContainer.addEventListener('change', changeFilters); // onEffectsContainerChange
 };
 
 /** открытие формы при загрузке файла */
 const onUploadPhoto = function() {
-  uploadInput.addEventListener('change', openForm);
+  uploadInput.addEventListener('change', openForm); // onUploadInputChange
 };
 
 /**
@@ -163,4 +167,4 @@ const onFileInputChange = () => {
 
 uploadInput.addEventListener('change', onFileInputChange);
 
-export {onUploadPhoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};
+export {onUploadPhoto, createSendForm, closeForm, unblockSubmitButton, onDocumentKeydown as onFormEsc};
