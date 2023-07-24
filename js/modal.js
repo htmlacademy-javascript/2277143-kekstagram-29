@@ -9,7 +9,7 @@ const descriptionBigPhoto = bigPhoto.querySelector('.social__caption');
 const commentsContainerBigPhoto = bigPhoto.querySelector('.social__comments');
 const commentsCountBigPhoto = bigPhoto.querySelector('.social__comment-count');
 const commentsLoaderBigPhoto = bigPhoto.querySelector('.comments-loader');
-let commentsShowArray = [];
+let displayedComments = [];
 
 const onPictureEsc = function(evt) {
   if(evt.key === 'Escape'){
@@ -53,13 +53,13 @@ const createPictureComments = function(comments) {
  * функция добавления ещё 5 коментариев
  */
 function showMoreComments () {
-  if (!commentsShowArray.length) {
+  if (!displayedComments.length) {
     return;
   }
-  const additionalComments = commentsShowArray.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
+  const additionalComments = displayedComments.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
   createPictureComments(additionalComments);
-  commentsCountBigPhoto.innerHTML = `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${commentsShowArray.length}</span> комментариев`;
-  if (commentsShowArray.length <= commentsContainerBigPhoto.children.length) {
+  commentsCountBigPhoto.innerHTML = `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${displayedComments.length}</span> комментариев`;
+  if (displayedComments.length <= commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
@@ -69,10 +69,10 @@ function showMoreComments () {
 * @param {array} comments - массив комментариев из объекта
 */
 function fillComments({comments}) {
-  const showFirstComments = comments.slice(0, COMMENT_PER_PORTION);
-  createPictureComments(showFirstComments);
-  commentsCountBigPhoto.innerHTML = `${showFirstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
-  if (showFirstComments.length >= comments.length) {
+  const firstComments = comments.slice(0, COMMENT_PER_PORTION);
+  createPictureComments(firstComments);
+  commentsCountBigPhoto.innerHTML = `${firstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
+  if (firstComments.length >= comments.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
@@ -86,7 +86,7 @@ const openModal = function(photo) {
   commentsContainerBigPhoto.innerHTML = '';
   commentsCountBigPhoto.classList.remove('hidden');
   commentsLoaderBigPhoto.classList.remove('hidden');
-  commentsShowArray = photo.comments;
+  displayedComments = photo.comments;
   body.classList.add('modal-open');
   bigPhoto.classList.remove('hidden');
   imgBigPhoto.src = photo.url;

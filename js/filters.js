@@ -1,4 +1,4 @@
-import {renderGallery} from './galery.js';
+import {renderGallery} from './gallery.js';
 import {debounce} from './util.js';
 
 const PHOTO_COUNT = 10;

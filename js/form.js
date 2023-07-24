@@ -9,7 +9,7 @@ const imageElement = document.querySelector('.img-upload__preview img');
 const uploadOverlay = upload.querySelector('.img-upload__overlay');
 const uploadForm = upload.querySelector('.img-upload__form');
 const closeButton = upload.querySelector('.img-upload__cancel');
-const textAreaDescripton = uploadForm.querySelector('.text__description');
+const textAreaDescription = uploadForm.querySelector('.text__description');
 const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const effects = document.querySelectorAll('.effects__preview');
@@ -32,7 +32,7 @@ const pristine = new Pristine(uploadForm, {
 const onFormEsc = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
-    if(document.activeElement !== textAreaDescripton && document.activeElement !== inputHashtag) {
+    if(document.activeElement !== textAreaDescription && document.activeElement !== inputHashtag) {
       closeForm();
     }
   }
@@ -41,7 +41,7 @@ const onFormEsc = function(evt) {
 /** скрывает форму */
 function closeForm () {
   uploadInput.value = '';
-  textAreaDescripton.value = '';
+  textAreaDescription.value = '';
   inputHashtag.value = '';
   body.classList.remove('modal-open');
   uploadOverlay.classList.add('hidden');
@@ -68,7 +68,7 @@ const openForm = function() {
 };
 
 /** открытие формы при загрузке файла */
-const onUploadFoto = function() {
+const onUploadPhoto = function() {
   uploadInput.addEventListener('change', openForm);
 };
 
@@ -81,8 +81,8 @@ const validateHashtag = function () {
     return true;
   }
   const hashtagsArr = inputHashtag.value.toLowerCase().split(' ');
-  const arrHashtagsNoNothink = hashtagsArr.filter((str) => str.trim() !== '');
-  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
+  const arrHashtagsNoNothing = hashtagsArr.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothing.filter((str) => str.trim() !== ' ');
   for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
     if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
       return false;
@@ -95,8 +95,8 @@ const validateHashtag = function () {
 const getErrorMessages = function () {
   const hashtagLowerCase = inputHashtag.value.toLowerCase();
   const arrHashtags = hashtagLowerCase.split(' ');
-  const arrHashtagsNoNothink = arrHashtags.filter((str) => str.trim() !== '');
-  const arrHashtagsNoSpace = arrHashtagsNoNothink.filter((str) => str.trim() !== ' ');
+  const arrHashtagsNoNothing = arrHashtags.filter((str) => str.trim() !== '');
+  const arrHashtagsNoSpace = arrHashtagsNoNothing.filter((str) => str.trim() !== ' ');
   let messageOne = '';
   let messageTwo = '';
   let messageThree = '';
@@ -108,7 +108,7 @@ const getErrorMessages = function () {
     if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtagsNoSpace.length > 5) {
+    if(arrHashtagsNoSpace.length > numberOfHashtag) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
@@ -162,4 +162,4 @@ const onFileInputChange = () => {
 
 uploadInput.addEventListener('change', onFileInputChange);
 
-export {onUploadFoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};
+export {onUploadPhoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};

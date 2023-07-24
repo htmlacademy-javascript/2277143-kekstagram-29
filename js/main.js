@@ -1,5 +1,5 @@
 import {createSendForm, closeForm, unblockSubmitButton} from './form.js';
-import {renderGallery} from './galery.js';
+import {renderGallery} from './gallery.js';
 import {getData, sendData} from './server.js';
 import {showAlert} from './util.js';
 import {showSuccessMessage, showErrorMessage} from './message.js';

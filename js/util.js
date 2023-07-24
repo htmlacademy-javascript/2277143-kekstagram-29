@@ -1,14 +1,6 @@
-//** debounce */
-const debounce = (callback, timeoutDelay = 500) => {
-  let timeoutId;
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
-};
+const ALERT_SHOW_TIME = 5000;
 
 /** alert */
-const ALERT_SHOW_TIME = 5000;
 const showAlert = (message) => {
   const alert = document.createElement('div');
   alert.style.position = 'absolute';
@@ -26,6 +18,15 @@ const showAlert = (message) => {
   setTimeout(() => {
     alert.remove();
   }, ALERT_SHOW_TIME);
+};
+
+//** debounce */
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };
 
 export {debounce, showAlert};

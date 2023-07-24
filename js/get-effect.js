@@ -103,7 +103,6 @@ const changeFilters = (evt) => {
     return;
   }
   filterCurrent = FILTERS.find((effect) => effect.name === evt.target.value);
-  uploadImagePreview.className = `effects__preview--${filterCurrent.name}`;
   updateSlider();
 };
 
