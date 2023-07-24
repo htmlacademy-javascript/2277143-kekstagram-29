@@ -1,6 +1,7 @@
+import {onFormEsc} from './form.js';
+
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-import {onFormEsc} from './form.js';
 
 function onDocumentKeydown(evt,cb){
   if (evt.key === 'Escape') {
