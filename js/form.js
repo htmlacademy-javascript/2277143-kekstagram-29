@@ -108,7 +108,7 @@ const getErrorMessages = function () {
     if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtagsNoSpace.length > 5) {
+    if(arrHashtagsNoSpace.length > numberOfHashtag) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
