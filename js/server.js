@@ -10,7 +10,7 @@ const Method = {
   POST: 'POST'
 };
 
-const ErroreText = {
+const ErrorTextDescription = {
   GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
   SEND_DATA: 'Не удалось отправить форму, Попробуйте ещё раз',
 };
@@ -29,9 +29,9 @@ const load = (route, errorText, method = Method.GET, body = null) =>
     });
 
 /** функция загрузки данных */
-const getData = () => load(Route.GET_DATA, ErroreText.GET_DATA);
+const getData = () => load(Route.GET_DATA, ErrorTextDescription.GET_DATA);
 
 /** функция отправки данных */
-const sendData = (body) => load(Route.SEND_DATA, ErroreText.SEND_DATA, Method.POST, body);
+const sendData = (body) => load(Route.SEND_DATA, ErrorTextDescription.SEND_DATA, Method.POST, body);
 
 export {getData, sendData};

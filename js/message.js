@@ -18,7 +18,7 @@ const onSuccessDocumentClick = (evt)=>{
 };
 
 /** обработчик клика на кнопке сообщения*/
-const onSuccesButtonClick = () => closeSuccessMessage();
+const onSuccessButtonClick = () => closeSuccessMessage();
 
 /** обработчик нажатия Escape */
 const onCloseSuccessMessage = (evt) => onDocumentKeydown(evt,closeSuccessMessage);
@@ -34,7 +34,7 @@ function closeSuccessMessage () {
 const showSuccessMessage = () => {
   const successBlock = successTemplate.cloneNode(true);
   document.body.append(successBlock);
-  successBlock.querySelector('.success__button').addEventListener('click', onSuccesButtonClick);
+  successBlock.querySelector('.success__button').addEventListener('click', onSuccessButtonClick);
   document.body.addEventListener('click',onSuccessDocumentClick);
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
@@ -48,7 +48,7 @@ const onErrorDocumentClick = (evt) => {
 };
 
 /** обработчик клика на кнопке сообщения*/
-const onErrorButtonclick = () => closeErrorMessage();
+const onErrorButtonСlick = () => closeErrorMessage();
 
 /** обработчик нажатия Escape */
 const onCloseErrorMessage = (evt) => onDocumentKeydown(evt,closeErrorMessage);
@@ -67,7 +67,7 @@ const showErrorMessage = () => {
   const errorButton = errorBlock.querySelector('.error__button');
   document.body.append(errorBlock);
   document.body.classList.add('has-modal');
-  errorButton.addEventListener('click',onErrorButtonclick);
+  errorButton.addEventListener('click',onErrorButtonСlick);
   document.body.addEventListener('keydown',onCloseErrorMessage);
   document.body.addEventListener('click',onErrorDocumentClick);
   document.removeEventListener('keydown', onFormEsc);
