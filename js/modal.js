@@ -72,7 +72,7 @@ function fillComments({comments}) {
   const firstComments = comments.slice(0, COMMENT_PER_PORTION);
   createPictureComments(firstComments);
   commentsCountBigPhoto.innerHTML = `${firstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
-  if (firstComments.length >= comments.length) {
+  if (firstComments.length === comments.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
