@@ -1,7 +1,15 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
-import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
+import {resetEffects, effectsContainer, onChangeFilters} from './get-effect.js';
 
+const NUMBER_OF_HASHTAGS = 5;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+/** тексты кнопки  */
+const SubmitButtonText = {
+  REST: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 const body = document.querySelector('body');
 const upload = document.querySelector('.img-upload');
 const uploadInput = upload.querySelector('.img-upload__input');
@@ -14,13 +22,6 @@ const inputHashtag = uploadForm.querySelector('.text__hashtags');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const effects = document.querySelectorAll('.effects__preview');
 const rulesHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-const numberOfHashtag = 5;
-
-/** тексты кнопки  */
-const SubmitButtonText = {
-  REST: 'Сохранить',
-  SENDING: 'Сохраняю...'
-};
 
 /** валидатор формы */
 const pristine = new Pristine(uploadForm, {
@@ -29,13 +30,17 @@ const pristine = new Pristine(uploadForm, {
 }, false);
 
 /** обработчик Escape */
-const onFormEsc = function(evt) {
+const onDocumentKeydown = function(evt) {
   if(evt.key === 'Escape'){
     evt.preventDefault();
     if(document.activeElement !== textAreaDescription && document.activeElement !== inputHashtag) {
       closeForm();
     }
   }
+};
+
+const onCloseButtonClick = function () {
+  closeForm();
 };
 
 /** скрывает форму */
@@ -45,13 +50,13 @@ function closeForm () {
   inputHashtag.value = '';
   body.classList.remove('modal-open');
   uploadOverlay.classList.add('hidden');
-  document.removeEventListener('keydown', onFormEsc);
-  closeButton.removeEventListener('click', closeForm);
+  document.removeEventListener('keydown', onDocumentKeydown);
+  closeButton.removeEventListener('click', onCloseButtonClick);
   resetScale();
   smallerButton.removeEventListener('click', onSmallerButtonClick);
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
-  effectsContainer.removeEventListener('change', changeFilters);
+  effectsContainer.removeEventListener('change', onChangeFilters);
   pristine.reset();
   uploadForm.reset();
 }
@@ -60,16 +65,16 @@ function closeForm () {
 const openForm = function() {
   body.classList.add('modal-open');
   uploadOverlay.classList.remove('hidden');
-  document.addEventListener('keydown', onFormEsc);
-  closeButton.addEventListener('click', closeForm);
+  document.addEventListener('keydown', onDocumentKeydown);
+  closeButton.addEventListener('click', onCloseButtonClick);
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
-  effectsContainer.addEventListener('change', changeFilters);
+  effectsContainer.addEventListener('change', onChangeFilters);
 };
 
 /** открытие формы при загрузке файла */
 const onUploadPhoto = function() {
-  uploadInput.addEventListener('change', openForm);
+  uploadInput.addEventListener('change', openForm); // onUploadInputChange
 };
 
 /**
@@ -84,7 +89,7 @@ const validateHashtag = function () {
   const arrHashtagsNoNothing = hashtagsArr.filter((str) => str.trim() !== '');
   const arrHashtagsNoSpace = arrHashtagsNoNothing.filter((str) => str.trim() !== ' ');
   for (let i = 0; i < arrHashtagsNoSpace.length; i++) {
-    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > numberOfHashtag) {
+    if (!rulesHashtag.test(arrHashtagsNoSpace[i]) || arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i || arrHashtagsNoSpace.length > NUMBER_OF_HASHTAGS) {
       return false;
     }
   }
@@ -108,7 +113,7 @@ const getErrorMessages = function () {
     if(arrHashtagsNoSpace.indexOf(arrHashtagsNoSpace[i]) !== i) {
       messageTwo = 'хэш-теги повторяются\n';
     }
-    if(arrHashtagsNoSpace.length > numberOfHashtag) {
+    if(arrHashtagsNoSpace.length > NUMBER_OF_HASHTAGS) {
       messageThree = 'превышено количество хэш-тегов\n';
     }
     errorMessage = messageOne + messageTwo + messageThree;
@@ -162,4 +167,4 @@ const onFileInputChange = () => {
 
 uploadInput.addEventListener('change', onFileInputChange);
 
-export {onUploadPhoto, createSendForm, closeForm, unblockSubmitButton, onFormEsc};
+export {onUploadPhoto, createSendForm, closeForm, unblockSubmitButton, onDocumentKeydown as onFormEsc};

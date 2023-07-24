@@ -98,7 +98,7 @@ const updateSlider = () => {
 /**
  * смена фильтра
  */
-const changeFilters = (evt) => {
+const onChangeFilters = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
@@ -141,4 +141,4 @@ closeSlider();
 
 sliderElement.noUiSlider.on('update', onUpdateSlider);
 
-export {resetEffects, effectsContainer, changeFilters};
+export {resetEffects, effectsContainer, onChangeFilters};

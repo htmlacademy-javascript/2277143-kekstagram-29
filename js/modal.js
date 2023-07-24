@@ -53,13 +53,10 @@ const createPictureComments = function(comments) {
  * функция добавления ещё 5 коментариев
  */
 function showMoreComments () {
-  if (!displayedComments.length) {
-    return;
-  }
   const additionalComments = displayedComments.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
   createPictureComments(additionalComments);
   commentsCountBigPhoto.innerHTML = `${commentsContainerBigPhoto.children.length} из <span class="comments-count">${displayedComments.length}</span> комментариев`;
-  if (displayedComments.length <= commentsContainerBigPhoto.children.length) {
+  if (displayedComments.length === commentsContainerBigPhoto.children.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
@@ -68,22 +65,17 @@ function showMoreComments () {
 Отрисовка начальных комментариев
 * @param {array} comments - массив комментариев из объекта
 */
-function fillComments({comments}) {
-  const firstComments = comments.slice(0, COMMENT_PER_PORTION);
+function fillComments() {
+  const firstComments = displayedComments.slice(commentsContainerBigPhoto.children.length, commentsContainerBigPhoto.children.length + COMMENT_PER_PORTION);
   createPictureComments(firstComments);
-  commentsCountBigPhoto.innerHTML = `${firstComments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
-  if (firstComments.length >= comments.length) {
+  commentsCountBigPhoto.innerHTML = `${firstComments.length} из <span class="comments-count">${displayedComments.length}</span> комментариев`;
+  if (firstComments.length === displayedComments.length) {
     commentsLoaderBigPhoto.classList.add('hidden');
   }
 }
 
-/**
-Функция открытия большой картинки при клике на миниатюру
-* @param {string} picture - DOM элемент миниатюры, по который мы кликнули
-* @param {object} photo - объект одной картинки, которую мы генирировали в data. Сюда передается именно объект той миниатюры по который мы кликнули. Передаем сюда этот объект в файле main.js
-*/
 const openModal = function(photo) {
-  commentsContainerBigPhoto.innerHTML = '';
+  commentsContainerBigPhoto.innerHTML = ''; // commentsContainerBigPhoto.children.length === 0
   commentsCountBigPhoto.classList.remove('hidden');
   commentsLoaderBigPhoto.classList.remove('hidden');
   displayedComments = photo.comments;
@@ -94,7 +86,7 @@ const openModal = function(photo) {
   commentsNumberBigPhoto.textContent = photo.comments.length;
   descriptionBigPhoto.textContent = photo.description;
   commentsLoaderBigPhoto.addEventListener('click', showMoreComments);
-  fillComments(photo);
+  fillComments();
   document.addEventListener('keydown', onPictureEsc);
   closeButton.addEventListener('click', closeModal);
 };

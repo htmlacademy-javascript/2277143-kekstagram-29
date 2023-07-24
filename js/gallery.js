@@ -2,7 +2,7 @@ import {openModal} from './modal.js';
 import {createThumbnails} from './get-pictures.js';
 
 const container = document.querySelector('.pictures');
-let clickHandler;
+let onContainerClick;
 
 /** вызывает модалку */
 const renderModal = (evt, pictures) => {
@@ -17,15 +17,15 @@ const renderModal = (evt, pictures) => {
 /** создание галереи */
 const renderGallery = (data) => {
   // удаляем предыдущий обработчик, если он был
-  if (clickHandler) {
-    container.removeEventListener('click', clickHandler);
+  if (onContainerClick) {
+    container.removeEventListener('click', onContainerClick);
   }
   // создаем новый обработчик
-  clickHandler = (evt) => {
+  onContainerClick = (evt) => {
     renderModal(evt, data);
   };
   // добавляем новый обработчик
-  container.addEventListener('click', clickHandler);
+  container.addEventListener('click', onContainerClick);
   createThumbnails(data);
 };
 

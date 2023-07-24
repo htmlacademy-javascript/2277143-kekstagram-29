@@ -1,8 +1,9 @@
-const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 import {onFormEsc} from './form.js';
 
-function onDocumentKeydown(evt,cb){
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+function checkEscapeKey (evt,cb){
   if (evt.key === 'Escape') {
     evt.preventDefault();
     cb();
@@ -10,7 +11,7 @@ function onDocumentKeydown(evt,cb){
 }
 
 /** обработчик клика вне окна */
-const onSuccessDocumentClick = (evt)=>{
+const onDocumentClick = (evt)=>{
   evt.preventDefault();
   if (!evt.target.closest('.success__inner')) {
     closeSuccessMessage();
@@ -20,14 +21,13 @@ const onSuccessDocumentClick = (evt)=>{
 /** обработчик клика на кнопке сообщения*/
 const onSuccessButtonClick = () => closeSuccessMessage();
 
-/** обработчик нажатия Escape */
-const onCloseSuccessMessage = (evt) => onDocumentKeydown(evt,closeSuccessMessage);
+const onDocumentKeydown = (evt) => checkEscapeKey(evt, closeSuccessMessage);
 
 /** скрывает сообщение */
 function closeSuccessMessage () {
   document.body.querySelector('.success').remove();
-  document.body.removeEventListener('click',onSuccessDocumentClick);
-  document.body.removeEventListener('keydown', onCloseSuccessMessage);
+  document.body.removeEventListener('click', onDocumentClick);
+  document.body.removeEventListener('keydown', onDocumentKeydown);
 }
 
 /** показывает сообщение */
@@ -35,8 +35,8 @@ const showSuccessMessage = () => {
   const successBlock = successTemplate.cloneNode(true);
   document.body.append(successBlock);
   successBlock.querySelector('.success__button').addEventListener('click', onSuccessButtonClick);
-  document.body.addEventListener('click',onSuccessDocumentClick);
-  document.body.addEventListener('keydown',onCloseSuccessMessage);
+  document.body.addEventListener('click', onDocumentClick);
+  document.body.addEventListener('keydown', onDocumentKeydown);
 };
 
 /** обработчик клика вне окна */
@@ -51,7 +51,7 @@ const onErrorDocumentClick = (evt) => {
 const onErrorButtonСlick = () => closeErrorMessage();
 
 /** обработчик нажатия Escape */
-const onCloseErrorMessage = (evt) => onDocumentKeydown(evt,closeErrorMessage);
+const onCloseErrorMessage = (evt) => checkEscapeKey(evt,closeErrorMessage);
 
 /** скрывает сообщение */
 function closeErrorMessage (){
@@ -70,7 +70,7 @@ const showErrorMessage = () => {
   errorButton.addEventListener('click',onErrorButtonСlick);
   document.body.addEventListener('keydown',onCloseErrorMessage);
   document.body.addEventListener('click',onErrorDocumentClick);
-  document.removeEventListener('keydown', onFormEsc);
+  document.removeEventListener('keydown', onFormEsc); //toDo
 };
 
 export{showSuccessMessage,showErrorMessage};
