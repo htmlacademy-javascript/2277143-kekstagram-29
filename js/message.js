@@ -70,7 +70,7 @@ const showErrorMessage = () => {
   errorButton.addEventListener('click',onErrorButtonСlick);
   document.body.addEventListener('keydown',onCloseErrorMessage);
   document.body.addEventListener('click',onErrorDocumentClick);
-  document.removeEventListener('keydown', onFormEsc); //toDo
+  document.removeEventListener('keydown', onFormEsc);
 };
 
 export{showSuccessMessage,showErrorMessage};
