@@ -1,5 +1,5 @@
 import {resetScale, smallerButton, onSmallerButtonClick, biggerButton, onBiggerButtonClick} from './scale-of-image.js';
-import {resetEffects, effectsContainer, changeFilters} from './get-effect.js';
+import {resetEffects, effectsContainer, onChangeFilters} from './get-effect.js';
 
 const NUMBER_OF_HASHTAGS = 5;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
@@ -56,7 +56,7 @@ function closeForm () {
   smallerButton.removeEventListener('click', onSmallerButtonClick);
   biggerButton.removeEventListener('click', onBiggerButtonClick);
   resetEffects();
-  effectsContainer.removeEventListener('change', changeFilters);
+  effectsContainer.removeEventListener('change', onChangeFilters);
   pristine.reset();
   uploadForm.reset();
 }
@@ -69,7 +69,7 @@ const openForm = function() {
   closeButton.addEventListener('click', onCloseButtonClick);
   smallerButton.addEventListener('click', onSmallerButtonClick);
   biggerButton.addEventListener('click', onBiggerButtonClick);
-  effectsContainer.addEventListener('change', changeFilters);
+  effectsContainer.addEventListener('change', onChangeFilters);
 };
 
 /** открытие формы при загрузке файла */
