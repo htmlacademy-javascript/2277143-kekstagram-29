@@ -75,7 +75,7 @@ function fillComments() {
 }
 
 const openModal = function(photo) {
-  commentsContainerBigPhoto.innerHTML = ''; // commentsContainerBigPhoto.children.length === 0
+  commentsContainerBigPhoto.innerHTML = '';
   commentsCountBigPhoto.classList.remove('hidden');
   commentsLoaderBigPhoto.classList.remove('hidden');
   displayedComments = photo.comments;
