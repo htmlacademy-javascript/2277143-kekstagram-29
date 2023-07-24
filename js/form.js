@@ -74,7 +74,7 @@ const openForm = function() {
 
 /** открытие формы при загрузке файла */
 const onUploadPhoto = function() {
-  uploadInput.addEventListener('change', openForm); // onUploadInputChange
+  uploadInput.addEventListener('change', openForm);
 };
 
 /**
